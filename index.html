@@ -5,157 +5,215 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Prototype Plan</title>
 <style>
-  :root{
-    --bg:#ffffff; --fg:#14171a; --muted:#5b6670; --line:#e3e7ea;
-    --accent:#1b4ed8; --chip:#f2f5f8;
-  }
-  :root:not([data-theme="light"]) { }
+  :root{ --bg:#fff; --fg:#000; --muted:#555; --line:#ccc; --chip:#f4f4f4; }
   @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --bg:#111417; --fg:#e8ecef; --muted:#9aa5ad; --line:#272c31;
-      --accent:#7aa2ff; --chip:#1a1f23;
-    }
+    :root:not([data-theme="light"]){ --bg:#000; --fg:#fff; --muted:#aaa; --line:#444; --chip:#141414; }
   }
-  :root[data-theme="dark"]{
-    --bg:#111417; --fg:#e8ecef; --muted:#9aa5ad; --line:#272c31;
-    --accent:#7aa2ff; --chip:#1a1f23;
-  }
+  :root[data-theme="dark"]{ --bg:#000; --fg:#fff; --muted:#aaa; --line:#444; --chip:#141414; }
   *{box-sizing:border-box}
-  body{
-    margin:0; background:var(--bg); color:var(--fg);
-    font:16px/1.6 ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    padding:48px 16px 96px;
-  }
-  main{max-width:760px;margin:0 auto}
-  h1{font-size:28px;line-height:1.25;margin:0 0 6px;letter-spacing:-.01em}
-  .sub{color:var(--muted);margin:0 0 36px;font-size:15px}
-  h2{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
-     margin:44px 0 14px;font-weight:600}
-  section{border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:0 0 14px}
-  section h3{margin:0 0 4px;font-size:17px;letter-spacing:-.01em}
-  .tag{display:inline-block;background:var(--chip);color:var(--muted);
-       font-size:11px;letter-spacing:.06em;text-transform:uppercase;
-       padding:3px 8px;border-radius:5px;margin-bottom:12px}
-  .role{color:var(--muted);font-size:14px;margin:0 0 14px}
-  ul{margin:0;padding-left:18px}
-  li{margin:5px 0}
-  li b{font-weight:600}
-  .ev{color:var(--muted);font-size:13px;margin-top:14px;padding-top:12px;
-      border-top:1px dashed var(--line)}
-  .note{background:var(--chip);border-radius:10px;padding:18px 22px;
-        font-size:14px;color:var(--muted);margin-top:40px}
-  .note b{color:var(--fg)}
-  a{color:var(--accent)}
+  body{margin:0;background:var(--bg);color:var(--fg);
+    font:15px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    padding:40px 16px 90px}
+  main{max-width:780px;margin:0 auto}
+  h1{font-size:22px;margin:0 0 6px;letter-spacing:-.01em}
+  .sub{color:var(--muted);margin:0 0 34px;font-size:14px}
+  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+     margin:38px 0 12px;font-weight:700;border-bottom:1px solid var(--line);padding-bottom:6px}
+  section{border:1px solid var(--line);padding:16px 18px;margin:0 0 10px}
+  section h3{margin:0 0 10px;font-size:15px}
+  .n{color:var(--muted);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+     display:block;margin-bottom:6px}
+  ul{margin:0;padding-left:17px}
+  li{margin:4px 0}
+  .ev{color:var(--muted);font-size:13px;margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}
+  table{border-collapse:collapse;width:100%;font-size:13px;margin-top:10px}
+  th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+  th{color:var(--muted);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+  .box{background:var(--chip);padding:16px 18px;margin-top:34px;font-size:14px;color:var(--muted)}
+  .box b{color:var(--fg)}
+  code{background:var(--chip);padding:1px 4px}
 </style>
 </head>
 <body>
 <main>
 
-  <h1>Prototype plan</h1>
-  <p class="sub">What each screen will contain, for approval before the UI build. No styling decisions made here.</p>
+<h1>Prototype plan</h1>
+<p class="sub">For approval before UI build. No styling decisions have been made here.</p>
 
-  <h2>Core loop</h2>
+<h2>Product</h2>
 
-  <section>
-    <span class="tag">Screen 01</span>
-    <h3>Today's set, no login</h3>
-    <p class="role">Entry point. Reachable by anyone with the link.</p>
-    <ul>
-      <li>Three items dated to today: one VARC, one DILR set, one Quant.</li>
-      <li>Start button leads straight into the question. No account, no email, no OTP.</li>
-      <li>Progress held in the browser until the user chooses to save it.</li>
-      <li>One line stating what is kept and what is not.</li>
-    </ul>
-    <p class="ev">Cracku gates the identical offer behind a mandatory OTP wall. R01 named that gated tool the best free thing he used, and still described online prep as a waste of time.</p>
-  </section>
+<section>
+  <span class="n">01</span>
+  <h3>Daily case</h3>
+  <ul>
+    <li>One case study a day. Read it once, then answer it from three angles: VARC, DI/LR, QA.</li>
+    <li>Short, real, CAT-level. Modelled on Cracku's free daily set, except the three questions share one case instead of sitting unrelated.</li>
+    <li>No login. No email. No OTP. Open the link, answer.</li>
+    <li>Free navigation across the three. No skip button, since a daily set of three does not need one.</li>
+    <li>Expires at midnight. Same discipline as Cracku's 24-hour window.</li>
+  </ul>
+  <p class="ev">Cracku gates the same offer behind a mandatory OTP wall. R01 called that gated tool the best free thing he used. IIMs run case comps across disciplines, so prep runs the same way.</p>
+</section>
 
-  <section>
-    <span class="tag">Screen 02</span>
-    <h3>Attempting a question</h3>
-    <p class="role">The exam surface.</p>
-    <ul>
-      <li>Question, options, running timer.</li>
-      <li>Skip is a first-class action sitting beside Submit, not hidden.</li>
-      <li>Time to first interaction recorded silently.</li>
-      <li>Time at the moment of skip recorded silently.</li>
-    </ul>
-    <p class="ev">R01 decides to skip inside 20 to 30 seconds. R02 decides within the first few words. Neither platform records that decision, so neither student can review it.</p>
-  </section>
+<section>
+  <span class="n">02</span>
+  <h3>Weekly mock</h3>
+  <ul>
+    <li>Interface-faithful. Laptop only, built to match the real exam environment rather than copy anyone's software.</li>
+    <li>Full sectional timing, 40 minutes a section, no pausing, no going back across sections.</li>
+    <li>Question level synced to where the student currently sits, not a fixed national paper.</li>
+    <li>Weekly, because toppers median 37 mocks and two in three take 20 to 45.</li>
+  </ul>
+  <p class="ev">R02: mock environment feels nothing like the real exam, nerves hit in the final. R01 gave 25 to 30 mocks and still landed 80 percentile.</p>
+</section>
 
-  <section>
-    <span class="tag">Screen 03</span>
-    <h3>After a wrong answer</h3>
-    <p class="role">The screen the whole product turns on.</p>
-    <ul>
-      <li>The correct answer and the method.</li>
-      <li><b>The platform states the cause.</b> Concept gap, method error, calculation slip, or selection error.</li>
-      <li>Cause derived from behaviour, not self-report: time taken, whether the method was started, where the chain broke, prior attempts on the same concept.</li>
-      <li>The student can disagree in one tap, which trains the assignment.</li>
-      <li>Each cause routes somewhere different, rather than all roads leading to a video.</li>
-    </ul>
-    <p class="ev">R02 item 15, amended: the identification of weak points should come from the platform, not from instinct. R01 keeps a list of topic names with nothing inside them. No platform walked tonight reports cause of error.</p>
-  </section>
+<section>
+  <span class="n">03</span>
+  <h3>Error tagging and review</h3>
+  <ul>
+    <li>Every wrong answer is tagged by the platform, not by the student.</li>
+    <li>Four tags, held in the backend: concept gap, method error, calculation slip, selection error.</li>
+    <li>Tag derived from behaviour. Time to first interaction, whether a method was started, where the chain broke, prior attempts on the same concept.</li>
+    <li>The student never sees the taxonomy. Jacob's law: show them the stats they already read on every other platform.</li>
+  </ul>
+  <table>
+    <tr><th>Backend tag</th><th>What the student sees</th></tr>
+    <tr><td>Concept gap</td><td>Topic marked not started. Routed to the concept repo.</td></tr>
+    <tr><td>Method error</td><td>Time above cohort average on a correct-method question. Shown an alternative approach.</td></tr>
+    <tr><td>Calculation slip</td><td>Accuracy below personal baseline on a known topic. Routed to drilling.</td></tr>
+    <tr><td>Selection error</td><td>Time spent on questions left unanswered. Routed to triage practice.</td></tr>
+  </table>
+  <p class="ev">R02, amended item 15: the assignment of weak points should come from the platform, not from instinct. R01 keeps only topic names, with nothing recorded about what goes wrong inside them. Nothing in the teardown reports cause of error.</p>
+</section>
 
-  <section>
-    <span class="tag">Screen 04</span>
-    <h3>Weak-point map</h3>
-    <p class="role">What the student actually has, instead of a list of topic names.</p>
-    <ul>
-      <li>Topics listed with the failure mode inside each one.</li>
-      <li>RC splits into comprehension failure and conclusion failure, rather than reading "RC".</li>
-      <li>Jumbled paragraphs splits into sentence formation and opening sentence.</li>
-      <li>Topics marked by whether the same error has recurred, and how many times.</li>
-      <li>Built entirely from attempt data. Nothing to fill in.</li>
-    </ul>
-    <p class="ev">R01 writes only the topic name and says the name alone tells him where he is going wrong. He then named logarithms and functions as errors he expects to repeat five or six times. R03 named logarithms and statistics as still unresolved.</p>
-  </section>
+<section>
+  <span class="n">04</span>
+  <h3>Weak point read</h3>
+  <ul>
+    <li>Topics carry their failure mode, not just their name.</li>
+    <li>RC splits into comprehension and conclusion. Jumbled paragraphs splits into sentence formation and opening sentence.</li>
+    <li>Repeat errors flagged by count, since a topic missed twice behaves differently from a topic missed once.</li>
+    <li>Built from attempt data. Nothing for the student to fill in.</li>
+  </ul>
+  <p class="ev">R01 writes the topic name and nothing else, then named logarithms and functions as errors he expects to repeat five or six times. R03 named logarithms and statistics as still unresolved.</p>
+</section>
 
-  <h2>Retention</h2>
+<section>
+  <span class="n">05</span>
+  <h3>1:1 mentorship, credit based</h3>
+  <ul>
+    <li>Mentors are current students at the colleges the user is targeting. Sourced through the Meridian network and the IIM networks reachable through it.</li>
+    <li>Model follows mentorunion.org. One credit buys half an hour. Each student starts with 10 credits.</li>
+    <li>Mentor supply is the constraint, so credits are earned back through streaks, mock completion and referrals rather than bought.</li>
+    <li>Covers both halves: concept 1:1 for the test, and GD/PI practice for the interview.</li>
+  </ul>
+  <p class="ev">66% of R01's 500 to 600 strong TIME batch left straight after the test and never returned for interview prep. The interview is where tier 2 and 3 candidates lose the seat they cleared the test for.</p>
+</section>
 
-  <section>
-    <span class="tag">Screen 05</span>
-    <h3>Rolling onboarding</h3>
-    <p class="role">Onboarding that never formally ends.</p>
-    <ul>
-      <li>No upfront form. The first session is a question, not a questionnaire.</li>
-      <li>Each unseen feature carries its own onboarding moment, completed on discovery.</li>
-      <li>Questions asked across sessions build the profile: attempt history, stream, work experience, target schools.</li>
-      <li>Those answers feed a readiness read against the profile of students who actually convert.</li>
-    </ul>
-    <p class="ev">R03 had no idea where to start and prepared alone for three weeks. R01's plan came entirely from his institute. R02 reports that students who set their own plan were always the top performers.</p>
-  </section>
+<section>
+  <span class="n">06</span>
+  <h3>Concept repos</h3>
+  <ul>
+    <li>First-principles breakdowns, written, not filmed. Video time tracks downward against score.</li>
+    <li>Organised by the framework underneath the question rather than by chapter, since CAT tests structure identification before it tests arithmetic.</li>
+    <li>Reached from an error tag, not browsed. The repo opens because something was missed, not because it is next on a syllabus.</li>
+  </ul>
+  <p class="ev">R02: concept faults come from early classes nobody pays attention to. R03 is not mathematical and found the standard Indian method of study a poor fit.</p>
+</section>
 
-  <section>
-    <span class="tag">Screen 06</span>
-    <h3>Session timing</h3>
-    <p class="role">When the student is prompted, and why then.</p>
-    <ul>
-      <li>Accuracy and speed logged against hour of day and day of week.</li>
-      <li>Prompts land in the windows where that individual performs, not on a fixed schedule.</li>
-      <li>Session length adapts to how the current session is going.</li>
-      <li>The student can see the read and override it.</li>
-    </ul>
-    <p class="ev">TIME ran five hours a day on a fixed timetable. R01 studied four to five hours, scored 80 percentile, and said the volume stopped making sense. No platform in the teardown adapts to time of day or pace.</p>
-  </section>
+<h2>Onboarding</h2>
 
-  <section>
-    <span class="tag">Screen 07</span>
-    <h3>Where you stand</h3>
-    <p class="role">Progress against a capped seat count.</p>
-    <ul>
-      <li>Position against the cohort, not a personal score curve.</li>
-      <li>Movement shown as how the field moved, since percentile is relative.</li>
-      <li>Benchmarks drawn from the band just above the student, not from the 99th percentile.</li>
-    </ul>
-    <p class="ev">R02: the thing that nearly made them stop was grades not improving in mocks. R01 quit 10 to 12 days out, once he worked out what his profile could realistically reach. Every competitor anchors its social proof on 99 percentile scorers.</p>
-  </section>
+<section>
+  <span class="n">07</span>
+  <h3>Rolling, optional, never finished</h3>
+  <ul>
+    <li>Not required. The daily case runs for anyone, forever, with zero information handed over.</li>
+    <li>Sign-up is prompted on every visit, present but not in the face.</li>
+    <li>No upfront form. Questions arrive across sessions, each one attached to a feature at the moment it is discovered.</li>
+    <li>Profile questions: 10th, 12th, graduation, stream, college, category, gender, attempt number, target schools.</li>
+    <li>Work experience in pegs, not free text: 1 month, 3, 6, 12, 24, then years. Built for freshers and near-freshers.</li>
+    <li>One competitor question: coaching, purchased mocks, online course, or nothing.</li>
+  </ul>
+  <p class="ev">R03 registered on time and started three weeks out with no idea where to begin. R01's plan came entirely from his institute. R02 reports the students who set their own plan were always the top performers.</p>
+</section>
 
-  <div class="note">
-    <b>Not in the MVP.</b> Video lessons, live classes, a doubt forum, mock test series, interview prep, city case competitions, offline meetups.
-    Each is either covered well by an incumbent or sits outside the 30 days.
-    <br><br>
-    <b>Deliberately unresolved.</b> How cause-of-error assignment behaves before enough attempt data exists. How much a student will accept being told their own weakness. Whether no-login content retains or evaporates.
-  </div>
+<section>
+  <span class="n">08</span>
+  <h3>Profile read</h3>
+  <ul>
+    <li>Onboarding answers score the user against the profile of candidates who actually convert, by institute, since each IIM weights academics differently.</li>
+    <li>Students close to a real shot get told so, and get mentor credits pushed at them.</li>
+    <li>Students far from it get told what the gap is in plain terms, including when the answer is work experience rather than a higher percentile.</li>
+    <li>Error tags feed the same read. What the platform promotes to a user is decided by where that user actually faults.</li>
+  </ul>
+  <p class="ev">R01 quit 10 to 12 days out after working out his own odds unaided: no category, no work ex, ordinary percentages. His own recommendation was that a fresher who cannot reach 99 should take 2 to 3 years of work experience first. Students are ROI decision-makers.</p>
+</section>
+
+<h2>Home</h2>
+
+<section>
+  <span class="n">09</span>
+  <h3>Stats strip</h3>
+  <ul>
+    <li>Very small section. Motivating numbers only.</li>
+    <li>Live and specific: how many answered today's case, average time, how the user's band moved.</li>
+    <li>Tell the user when they are the most active, or the strongest answerer, in the current window.</li>
+    <li>Benchmarks pulled from the band just above the user. No 99 percentile anchors.</li>
+  </ul>
+  <p class="ev">Every platform in the teardown anchors its social proof on toppers who were already strong before they joined. R02: what nearly made them stop was grades not improving.</p>
+</section>
+
+<h2>Backend</h2>
+
+<section>
+  <span class="n">10</span>
+  <h3>Data, inside one hour and zero spend</h3>
+  <ul>
+    <li>Anonymous play is local. Attempts, timings and streak held in the browser, keyed to a generated ID.</li>
+    <li>On sign-up the local record is posted to a Google Sheet through an Apps Script endpoint. Free, no infrastructure, no account for the user to manage.</li>
+    <li>Sheet holds: anon ID, profile answers, per-question timings, tags, credits, mentor sessions.</li>
+    <li>Content is static JSON in the repo, versioned by date. The daily case ships as a file, not a database row.</li>
+    <li>Supabase is out. It cannot be stood up end to end in the time available.</li>
+  </ul>
+</section>
+
+<h2>Go to market</h2>
+
+<section>
+  <span class="n">11</span>
+  <h3>Who, and when</h3>
+  <ul>
+    <li>Primary target is the post-result window, not the 30 days before. Exam clearers awaiting calls, specifically private-college GEMs and high-diversity non-engineers holding strong composite scores and highly risk-averse.</li>
+    <li>Secondary is the next cycle's takers, who are deciding on coaching right now.</li>
+    <li>Both convert at zero cost, since both are already looking.</li>
+  </ul>
+</section>
+
+<section>
+  <span class="n">12</span>
+  <h3>Profiling as the growth engine</h3>
+  <ul>
+    <li>Sign up candidates closest to the real IIM ICP, build them into winner cohorts, let the results carry the word of mouth.</li>
+    <li>Selection rate is the metric, so the admissions bar at intake is a growth lever, not a filter.</li>
+  </ul>
+</section>
+
+<section>
+  <span class="n">13</span>
+  <h3>City mixers</h3>
+  <ul>
+    <li>GD and interview prep in person, run where the Meridian network overlaps the local candidate pool.</li>
+    <li>Pilot in metros. Kill the format if sign-ups come in under 10 per mixer.</li>
+    <li>One mentor per mixer, drawn from the same credit pool.</li>
+    <li>Zero spend. Public venue, no booking, no catering.</li>
+  </ul>
+</section>
+
+<div class="box">
+  <b>Out of the MVP.</b> Video lessons, live classes, doubt forum, paid mock series, application form cross-sell.
+  <br><br>
+  <b>Unresolved.</b> How the error tag behaves before enough attempt data exists. Whether a student accepts being told their weakness rather than naming it. Whether no-login content retains anyone, given 90% of students handed a free proven tool used it under six hours. Whether mentor supply holds at 100 mentors against the credit load.
+</div>
 
 </main>
 </body>
