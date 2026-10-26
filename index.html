@@ -2,219 +2,602 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Prototype Plan</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Meridian Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{ --bg:#fff; --fg:#000; --muted:#555; --line:#ccc; --chip:#f4f4f4; }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){ --bg:#000; --fg:#fff; --muted:#aaa; --line:#444; --chip:#141414; }
-  }
-  :root[data-theme="dark"]{ --bg:#000; --fg:#fff; --muted:#aaa; --line:#444; --chip:#141414; }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--fg);
-    font:15px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
-    padding:40px 16px 90px}
-  main{max-width:780px;margin:0 auto}
-  h1{font-size:22px;margin:0 0 6px;letter-spacing:-.01em}
-  .sub{color:var(--muted);margin:0 0 34px;font-size:14px}
-  h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
-     margin:38px 0 12px;font-weight:700;border-bottom:1px solid var(--line);padding-bottom:6px}
-  section{border:1px solid var(--line);padding:16px 18px;margin:0 0 10px}
-  section h3{margin:0 0 10px;font-size:15px}
-  .n{color:var(--muted);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
-     display:block;margin-bottom:6px}
-  ul{margin:0;padding-left:17px}
-  li{margin:4px 0}
-  .ev{color:var(--muted);font-size:13px;margin-top:12px;padding-top:10px;border-top:1px dashed var(--line)}
-  table{border-collapse:collapse;width:100%;font-size:13px;margin-top:10px}
-  th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
-  th{color:var(--muted);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
-  .box{background:var(--chip);padding:16px 18px;margin-top:34px;font-size:14px;color:var(--muted)}
-  .box b{color:var(--fg)}
-  code{background:var(--chip);padding:1px 4px}
+:root{
+  --bg:#ffffff; --surface:#ffffff; --raise:#f7f8f9; --fg:#14181b; --muted:#6b757d;
+  --line:#e6e9eb; --brand:#1cb37a; --brand-d:#169966; --hot:#e23744; --warm:#f5a623;
+  --shadow:0 1px 0 var(--line);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#101315; --surface:#161a1d; --raise:#1c2125; --fg:#eef1f3; --muted:#98a2aa;
+  --line:#252b30; --brand:#2ad08f; --brand-d:#1cb37a; --hot:#ff5a66; --warm:#ffbe4d;
+}}
+:root[data-theme="dark"]{
+  --bg:#101315; --surface:#161a1d; --raise:#1c2125; --fg:#eef1f3; --muted:#98a2aa;
+  --line:#252b30; --brand:#2ad08f; --brand-d:#1cb37a; --hot:#ff5a66; --warm:#ffbe4d;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 Nunito,ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 120px}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+
+/* top */
+.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:12px;height:60px;padding-top:0;padding-bottom:0}
+.logo{font-weight:800;letter-spacing:-.02em;font-size:18px}
+.logo span{color:var(--brand)}
+.spacer{flex:1}
+.streak{display:flex;align-items:center;gap:5px;font-weight:700;font-size:14px;color:var(--warm)}
+.ghost{padding:7px 14px;border-radius:999px;border:1.5px solid var(--line);font-weight:700;font-size:14px}
+.ghost:hover{border-color:var(--brand)}
+
+/* nav */
+.tabs{display:flex;gap:4px;overflow-x:auto;padding:14px 0 2px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{white-space:nowrap;padding:8px 14px;border-radius:999px;font-weight:700;font-size:14px;color:var(--muted)}
+.tab.on{background:var(--raise);color:var(--fg)}
+
+/* generic */
+h1{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-bottom:6px}
+h2{font-size:19px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px}
+h3{font-size:15px;font-weight:700}
+.sub{color:var(--muted);font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:12px}
+.row{display:flex;align-items:center;gap:12px}
+.pill{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
+  padding:4px 9px;border-radius:999px;background:var(--raise);color:var(--muted)}
+.pill.v{color:var(--brand)}.pill.d{color:var(--hot)}.pill.q{color:var(--warm)}
+.btn{display:block;width:100%;text-align:center;background:var(--brand);color:#06231a;
+  font-weight:800;padding:15px;border-radius:14px;box-shadow:0 4px 0 var(--brand-d);
+  transition:transform .06s,box-shadow .06s}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--brand-d)}
+.btn.sec{background:var(--raise);color:var(--fg);box-shadow:0 4px 0 var(--line)}
+.btn.sm{padding:11px;font-size:14px;border-radius:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.muted{color:var(--muted)}
+.sm{font-size:13px}
+
+/* option */
+.opt{display:block;width:100%;text-align:left;border:2px solid var(--line);border-radius:14px;
+  padding:14px 16px;margin-bottom:9px;font-weight:600;transition:border-color .1s,background .1s}
+.opt:hover{border-color:var(--brand)}
+.opt.pick{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 12%,transparent)}
+.opt.right{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 16%,transparent)}
+.opt.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,transparent)}
+
+/* progress */
+.bar{height:10px;background:var(--raise);border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--brand);border-radius:999px;transition:width .3s}
+
+.passage{background:var(--raise);border-radius:12px;padding:16px;font-size:15px;line-height:1.65;
+  max-height:260px;overflow:auto;margin-bottom:14px}
+.passage p{margin-bottom:10px}
+
+/* stat */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.stat{background:var(--raise);border-radius:14px;padding:14px;text-align:center}
+.stat b{display:block;font-size:22px;font-weight:800;letter-spacing:-.02em}
+.stat span{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+
+/* mock shell */
+.mock{position:fixed;inset:0;z-index:60;background:#fff;color:#111;display:none;
+  font:14px/1.45 Arial,Helvetica,sans-serif}
+.mock.on{display:flex;flex-direction:column}
+.mk-top{background:#2d3a46;color:#fff;padding:7px 12px;display:flex;align-items:center;gap:16px;font-size:13px}
+.mk-top b{font-weight:700}
+.mk-sec{background:#eef1f4;border-bottom:1px solid #c9d2da;padding:6px 12px;display:flex;align-items:center;gap:8px}
+.mk-sec button{padding:5px 14px;border-radius:3px 3px 0 0;font-size:13px;color:#2a6496}
+.mk-sec button.on{background:#2a6496;color:#fff;font-weight:700}
+.mk-time{margin-left:auto;font-weight:700;font-size:13px;color:#111}
+.mk-body{flex:1;display:flex;min-height:0}
+.mk-q{flex:1;overflow:auto;padding:14px 16px;border-right:1px solid #c9d2da}
+.mk-q .meta{color:#c0392b;font-weight:700;font-size:12px;margin-bottom:8px}
+.mk-q .marks{text-align:right;font-size:12px;color:#444;margin-bottom:10px}
+.mk-q label{display:block;margin:7px 0;cursor:pointer}
+.mk-side{width:252px;background:#eaf2f8;overflow:auto;padding:10px}
+.lg{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;margin-bottom:10px}
+.lg div{display:flex;align-items:center;gap:5px}
+.dot{width:20px;height:20px;border-radius:4px;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700}
+.palette{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:8px}
+.palette button{height:34px;border-radius:5px;background:#d9d9d9;color:#333;font-weight:700;font-size:13px}
+.palette button.ans{background:#22a04a;color:#fff}
+.palette button.notans{background:#e2574c;color:#fff}
+.palette button.cur{outline:3px solid #f5a623}
+.mk-foot{border-top:1px solid #c9d2da;padding:9px 12px;display:flex;gap:8px;align-items:center;background:#f7f9fa}
+.mk-foot button{padding:9px 14px;border-radius:4px;background:#dfe6ec;font-size:13px;font-weight:700;color:#234}
+.mk-foot .save{margin-left:auto;background:#22a04a;color:#fff}
+
+/* loader */
+.loader{position:fixed;inset:0;z-index:80;background:var(--bg);display:none;
+  flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;text-align:center}
+.loader.on{display:flex}
+.spin{width:34px;height:34px;border:4px solid var(--line);border-top-color:var(--brand);
+  border-radius:50%;animation:s .7s linear infinite}
+@keyframes s{to{transform:rotate(360deg)}}
+.loader p{max-width:330px;font-size:14px;color:var(--muted);font-weight:600}
+
+/* sheet */
+.sheet{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.45);display:none;align-items:flex-end}
+.sheet.on{display:flex}
+.sheet .in{background:var(--surface);width:100%;max-width:720px;margin:0 auto;
+  border-radius:20px 20px 0 0;padding:22px 18px 28px}
+@media(min-width:721px){.sheet{align-items:center}.sheet .in{border-radius:20px}}
+
+.note{background:var(--raise);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--muted);margin-top:10px}
+.note b{color:var(--fg)}
+hr{border:0;border-top:1px solid var(--line);margin:18px 0}
 </style>
 </head>
 <body>
-<main>
 
-<h1>Prototype plan</h1>
-<p class="sub">For approval before UI build. No styling decisions have been made here.</p>
+<div class="loader" id="loader"><div class="spin"></div><p id="loadmsg"></p></div>
 
-<h2>Product</h2>
+<header class="top"><div class="wrap">
+  <div class="logo">meridian<span>.</span></div>
+  <div class="spacer"></div>
+  <div class="streak" id="streak">0 day streak</div>
+  <button class="ghost" id="signbtn">Sign up</button>
+</div></header>
 
-<section>
-  <span class="n">01</span>
-  <h3>Daily case</h3>
-  <ul>
-    <li>One case study a day. Read it once, then answer it from three angles: VARC, DI/LR, QA.</li>
-    <li>Short, real, CAT-level. Modelled on Cracku's free daily set, except the three questions share one case instead of sitting unrelated.</li>
-    <li>No login. No email. No OTP. Open the link, answer.</li>
-    <li>Free navigation across the three. No skip button, since a daily set of three does not need one.</li>
-    <li>Expires at midnight. Same discipline as Cracku's 24-hour window.</li>
-  </ul>
-  <p class="ev">Cracku gates the same offer behind a mandatory OTP wall. R01 called that gated tool the best free thing he used. IIMs run case comps across disciplines, so prep runs the same way.</p>
-</section>
-
-<section>
-  <span class="n">02</span>
-  <h3>Weekly mock</h3>
-  <ul>
-    <li>Interface-faithful. Laptop only, built to match the real exam environment rather than copy anyone's software.</li>
-    <li>Full sectional timing, 40 minutes a section, no pausing, no going back across sections.</li>
-    <li>Question level synced to where the student currently sits, not a fixed national paper.</li>
-    <li>Weekly, because toppers median 37 mocks and two in three take 20 to 45.</li>
-  </ul>
-  <p class="ev">R02: mock environment feels nothing like the real exam, nerves hit in the final. R01 gave 25 to 30 mocks and still landed 80 percentile.</p>
-</section>
-
-<section>
-  <span class="n">03</span>
-  <h3>Error tagging and review</h3>
-  <ul>
-    <li>Every wrong answer is tagged by the platform, not by the student.</li>
-    <li>Four tags, held in the backend: concept gap, method error, calculation slip, selection error.</li>
-    <li>Tag derived from behaviour. Time to first interaction, whether a method was started, where the chain broke, prior attempts on the same concept.</li>
-    <li>The student never sees the taxonomy. Jacob's law: show them the stats they already read on every other platform.</li>
-  </ul>
-  <table>
-    <tr><th>Backend tag</th><th>What the student sees</th></tr>
-    <tr><td>Concept gap</td><td>Topic marked not started. Routed to the concept repo.</td></tr>
-    <tr><td>Method error</td><td>Time above cohort average on a correct-method question. Shown an alternative approach.</td></tr>
-    <tr><td>Calculation slip</td><td>Accuracy below personal baseline on a known topic. Routed to drilling.</td></tr>
-    <tr><td>Selection error</td><td>Time spent on questions left unanswered. Routed to triage practice.</td></tr>
-  </table>
-  <p class="ev">R02, amended item 15: the assignment of weak points should come from the platform, not from instinct. R01 keeps only topic names, with nothing recorded about what goes wrong inside them. Nothing in the teardown reports cause of error.</p>
-</section>
-
-<section>
-  <span class="n">04</span>
-  <h3>Weak point read</h3>
-  <ul>
-    <li>Topics carry their failure mode, not just their name.</li>
-    <li>RC splits into comprehension and conclusion. Jumbled paragraphs splits into sentence formation and opening sentence.</li>
-    <li>Repeat errors flagged by count, since a topic missed twice behaves differently from a topic missed once.</li>
-    <li>Built from attempt data. Nothing for the student to fill in.</li>
-  </ul>
-  <p class="ev">R01 writes the topic name and nothing else, then named logarithms and functions as errors he expects to repeat five or six times. R03 named logarithms and statistics as still unresolved.</p>
-</section>
-
-<section>
-  <span class="n">05</span>
-  <h3>1:1 mentorship, credit based</h3>
-  <ul>
-    <li>Mentors are current students at the colleges the user is targeting. Sourced through the Meridian network and the IIM networks reachable through it.</li>
-    <li>Model follows mentorunion.org. One credit buys half an hour. Each student starts with 10 credits.</li>
-    <li>Mentor supply is the constraint, so credits are earned back through streaks, mock completion and referrals rather than bought.</li>
-    <li>Covers both halves: concept 1:1 for the test, and GD/PI practice for the interview.</li>
-  </ul>
-  <p class="ev">66% of R01's 500 to 600 strong TIME batch left straight after the test and never returned for interview prep. The interview is where tier 2 and 3 candidates lose the seat they cleared the test for.</p>
-</section>
-
-<section>
-  <span class="n">06</span>
-  <h3>Concept repos</h3>
-  <ul>
-    <li>First-principles breakdowns, written, not filmed. Video time tracks downward against score.</li>
-    <li>Organised by the framework underneath the question rather than by chapter, since CAT tests structure identification before it tests arithmetic.</li>
-    <li>Reached from an error tag, not browsed. The repo opens because something was missed, not because it is next on a syllabus.</li>
-  </ul>
-  <p class="ev">R02: concept faults come from early classes nobody pays attention to. R03 is not mathematical and found the standard Indian method of study a poor fit.</p>
-</section>
-
-<h2>Onboarding</h2>
-
-<section>
-  <span class="n">07</span>
-  <h3>Rolling, optional, never finished</h3>
-  <ul>
-    <li>Not required. The daily case runs for anyone, forever, with zero information handed over.</li>
-    <li>Sign-up is prompted on every visit, present but not in the face.</li>
-    <li>No upfront form. Questions arrive across sessions, each one attached to a feature at the moment it is discovered.</li>
-    <li>Profile questions: 10th, 12th, graduation, stream, college, category, gender, attempt number, target schools.</li>
-    <li>Work experience in pegs, not free text: 1 month, 3, 6, 12, 24, then years. Built for freshers and near-freshers.</li>
-    <li>One competitor question: coaching, purchased mocks, online course, or nothing.</li>
-  </ul>
-  <p class="ev">R03 registered on time and started three weeks out with no idea where to begin. R01's plan came entirely from his institute. R02 reports the students who set their own plan were always the top performers.</p>
-</section>
-
-<section>
-  <span class="n">08</span>
-  <h3>Profile read</h3>
-  <ul>
-    <li>Onboarding answers score the user against the profile of candidates who actually convert, by institute, since each IIM weights academics differently.</li>
-    <li>Students close to a real shot get told so, and get mentor credits pushed at them.</li>
-    <li>Students far from it get told what the gap is in plain terms, including when the answer is work experience rather than a higher percentile.</li>
-    <li>Error tags feed the same read. What the platform promotes to a user is decided by where that user actually faults.</li>
-  </ul>
-  <p class="ev">R01 quit 10 to 12 days out after working out his own odds unaided: no category, no work ex, ordinary percentages. His own recommendation was that a fresher who cannot reach 99 should take 2 to 3 years of work experience first. Students are ROI decision-makers.</p>
-</section>
-
-<h2>Home</h2>
-
-<section>
-  <span class="n">09</span>
-  <h3>Stats strip</h3>
-  <ul>
-    <li>Very small section. Motivating numbers only.</li>
-    <li>Live and specific: how many answered today's case, average time, how the user's band moved.</li>
-    <li>Tell the user when they are the most active, or the strongest answerer, in the current window.</li>
-    <li>Benchmarks pulled from the band just above the user. No 99 percentile anchors.</li>
-  </ul>
-  <p class="ev">Every platform in the teardown anchors its social proof on toppers who were already strong before they joined. R02: what nearly made them stop was grades not improving.</p>
-</section>
-
-<h2>Backend</h2>
-
-<section>
-  <span class="n">10</span>
-  <h3>Data, inside one hour and zero spend</h3>
-  <ul>
-    <li>Anonymous play is local. Attempts, timings and streak held in the browser, keyed to a generated ID.</li>
-    <li>On sign-up the local record is posted to a Google Sheet through an Apps Script endpoint. Free, no infrastructure, no account for the user to manage.</li>
-    <li>Sheet holds: anon ID, profile answers, per-question timings, tags, credits, mentor sessions.</li>
-    <li>Content is static JSON in the repo, versioned by date. The daily case ships as a file, not a database row.</li>
-    <li>Supabase is out. It cannot be stood up end to end in the time available.</li>
-  </ul>
-</section>
-
-<h2>Go to market</h2>
-
-<section>
-  <span class="n">11</span>
-  <h3>Who, and when</h3>
-  <ul>
-    <li>Primary target is the post-result window, not the 30 days before. Exam clearers awaiting calls, specifically private-college GEMs and high-diversity non-engineers holding strong composite scores and highly risk-averse.</li>
-    <li>Secondary is the next cycle's takers, who are deciding on coaching right now.</li>
-    <li>Both convert at zero cost, since both are already looking.</li>
-  </ul>
-</section>
-
-<section>
-  <span class="n">12</span>
-  <h3>Profiling as the growth engine</h3>
-  <ul>
-    <li>Sign up candidates closest to the real IIM ICP, build them into winner cohorts, let the results carry the word of mouth.</li>
-    <li>Selection rate is the metric, so the admissions bar at intake is a growth lever, not a filter.</li>
-  </ul>
-</section>
-
-<section>
-  <span class="n">13</span>
-  <h3>City mixers</h3>
-  <ul>
-    <li>GD and interview prep in person, run where the Meridian network overlaps the local candidate pool.</li>
-    <li>Pilot in metros. Kill the format if sign-ups come in under 10 per mixer.</li>
-    <li>One mentor per mixer, drawn from the same credit pool.</li>
-    <li>Zero spend. Public venue, no booking, no catering.</li>
-  </ul>
-</section>
-
-<div class="box">
-  <b>Out of the MVP.</b> Video lessons, live classes, doubt forum, paid mock series, application form cross-sell.
-  <br><br>
-  <b>Unresolved.</b> How the error tag behaves before enough attempt data exists. Whether a student accepts being told their weakness rather than naming it. Whether no-login content retains anyone, given 90% of students handed a free proven tool used it under six hours. Whether mentor supply holds at 100 mentors against the credit load.
+<div class="wrap">
+  <nav class="tabs" id="tabs"></nav>
+  <main id="view"></main>
 </div>
 
-</main>
+<!-- mock -->
+<div class="mock" id="mock">
+  <div class="mk-top">
+    <b>Meridian Mock</b>
+    <span id="mkmode"></span>
+    <span class="spacer" style="flex:1"></span>
+    <span>Question Paper</span><span>Instructions</span>
+  </div>
+  <div class="mk-sec">
+    <span style="font-size:12px;color:#555">Section</span>
+    <button class="on" id="mksecname">VARC</button>
+    <span class="mk-time">Time Left : <b id="mktime">40:00</b></span>
+  </div>
+  <div class="mk-body">
+    <div class="mk-q" id="mkq"></div>
+    <div class="mk-side">
+      <div class="lg">
+        <div><i class="dot" style="background:#22a04a" id="c-ans">0</i> Answered</div>
+        <div><i class="dot" style="background:#e2574c" id="c-not">0</i> Not Answered</div>
+        <div><i class="dot" style="background:#d9d9d9;color:#333" id="c-nv">0</i> Not Visited</div>
+        <div><i class="dot" style="background:#7b4fa8" id="c-mark">0</i> Marked</div>
+      </div>
+      <div style="background:#2a6496;color:#fff;padding:5px 8px;font-size:12px;font-weight:700">Choose a Question</div>
+      <div class="palette" id="mkpal"></div>
+    </div>
+  </div>
+  <div class="mk-foot">
+    <button id="mkmark">Mark for Review &amp; Next</button>
+    <button id="mkclear">Clear Response</button>
+    <button class="save" id="mksave">Save &amp; Next</button>
+    <button id="mkend" style="background:#c0392b;color:#fff">Submit</button>
+  </div>
+</div>
+
+<div class="sheet" id="sheet"><div class="in" id="sheetin"></div></div>
+
+<script>
+/* ---------- state ---------- */
+const S = {
+  tab:'today', streak:0, signed:false, profile:null,
+  credits:10, caseIdx:0, answers:{}, times:{}, tStart:0,
+  tags:[], repoStage:0, repoScore:0, mock:null
+};
+try{ Object.assign(S, JSON.parse(localStorage.getItem('mp')||'{}')); }catch(e){}
+const save=()=>{try{localStorage.setItem('mp',JSON.stringify(S))}catch(e){}};
+
+/* ---------- content ---------- */
+const CASE = {
+  date: new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long'}),
+  title: "The Forest Act and the people inside it",
+  passage: [
+    "When a state draws a line around a forest and calls it protected, it does two things at once. It freezes an ecosystem in law, and it converts the people living inside that line into a problem to be managed. The Forest Act of 1982 did both, and the second consequence was never written down.",
+    "Administrators of the period argued that tribal cultivation was the principal driver of canopy loss. The figures they relied on counted cleared hectares without distinguishing between rotational cultivation, which returns land to forest within a decade, and commercial felling, which does not. Later surveys separated the two and found that commercial extraction accounted for the larger share in every district studied.",
+    "The Act survived this correction. Its machinery had already been built, its officers appointed, its categories entered into the revenue record. A policy, once administered, acquires a constituency of its own."
+  ],
+  q: [
+    { sec:'VARC', type:'Paragraph summary',
+      stem:'Which of the following best captures the argument of the passage?',
+      opts:[
+        'The Forest Act of 1982 failed because its officers were corrupt.',
+        'A policy built on a mistaken premise persisted because the administration around it had already been established.',
+        'Tribal cultivation was less damaging to forests than commercial extraction.',
+        'Conservation law should account for the people living inside protected areas.'],
+      ans:1,
+      why:'Options 3 and 4 are true statements in or around the passage, but neither is the argument. The passage moves from a premise being corrected to the policy surviving anyway. Option 2 carries that movement.' },
+    { sec:'DI/LR', type:'Set logic',
+      stem:'Four districts were surveyed. In each, commercial extraction exceeded rotational cultivation. District A lost 1,200 ha in total. If rotational cultivation never exceeds 40% of the loss in any district, what is the maximum hectares in A attributable to rotational cultivation?',
+      opts:['600 ha','480 ha','720 ha','400 ha'],
+      ans:1,
+      why:'The binding constraint is the 40% ceiling, not the comparison to commercial extraction. 40% of 1,200 is 480. The comparison is a distractor that already follows from the ceiling.' },
+    { sec:'QA', type:'Percentages',
+      stem:'A district recorded 1,200 ha of forest loss. After re-survey, the share attributed to cultivation fell from 65% to 40% of the total. By what percentage did the hectares attributed to cultivation fall?',
+      opts:['25%','38.5%','62.5%','40%'],
+      ans:1,
+      why:'The trap is subtracting the percentages. 65% of 1,200 is 780. 40% is 480. The fall is 300 on a base of 780, which is 38.46%. A 25-point drop in share is not a 25% drop in quantity.' }
+  ]
+};
+
+const REPO = {
+  title:'Percentage change on a shifting base',
+  body:[
+    'A percentage is always a percentage of something. When that something changes, the percentage changes meaning even if the number stays identical.',
+    'Two quantities are at work in every CAT percentage question. The base, and the change measured against it. Most errors come from measuring the change against the wrong base.',
+    'A share falling from 65% to 40% is a fall of 25 percentage points. It is not a fall of 25 percent. The quantity fell from 0.65B to 0.40B, a fall of 0.25B on a base of 0.65B, which is 38.46 percent.',
+    'Hold the base still in your head before you compute anything. The question will usually move it on you.'
+  ],
+  quiz:[
+    { stem:'A share moves from 50% to 60%. The percentage point change is:', opts:['10 points','20 percent','10 percent','Cannot say'], ans:0, lvl:'Recall' },
+    { stem:'A quantity is 80% of 500. It becomes 80% of 600. The quantity rose by:', opts:['0%','20%','25%','80%'], ans:1, lvl:'Applied' },
+    { stem:'Price rises 20%, then falls 20%. Net change:', opts:['0%','-4%','+4%','-2%'], ans:1, lvl:'CAT level' },
+    { stem:'A is 25% less than B. B is what percent more than A?', opts:['25%','33.33%','20%','75%'], ans:1, lvl:'CAT level' },
+    { stem:'Revenue falls 10% while volume rises 12.5%. Price per unit changed by:', opts:['-20%','-2.5%','-22.5%','+2.5%'], ans:0, lvl:'Above CAT' }
+  ]
+};
+
+const MENTORS = [
+  {n:'Mentor A', c:'IIM Bangalore', y:'PGP 2026-28', bg:'Non-engineer, converted at 98.4 with diversity weight', for:'Profile read, PI'},
+  {n:'Mentor B', c:'IIM Calcutta', y:'PGP 2025-27', bg:'Private college GEM, cleared on second attempt', for:'QA method, mock strategy'},
+  {n:'Mentor C', c:'IIM Ahmedabad', y:'PGP 2026-28', bg:'27 months work ex, Big 4', for:'WAT, GD, work ex framing'},
+  {n:'Mentor D', c:'IIM Lucknow', y:'PGP 2025-27', bg:'Commerce background, VARC specialist', for:'VARC, parajumbles, summary'}
+];
+
+const LOADMSG = [
+  'Students who answer the daily case four days a week move a full band in six weeks.',
+  'Two in three people who clear CAT took between 20 and 45 full mocks.',
+  'Three in four of the 100 percentile scorers in CAT 2025 were not engineers.',
+  'About 35 percent of people who get in do it on their second or third attempt.',
+  'Most people who cleared it studied two to three hours on a weekday. Not five.'
+];
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const view=$('#view');
+function loader(then){
+  const l=$('#loader'); $('#loadmsg').textContent=LOADMSG[Math.floor(Math.random()*LOADMSG.length)];
+  l.classList.add('on'); setTimeout(()=>{l.classList.remove('on'); then&&then();},620);
+}
+function sheet(html){ $('#sheetin').innerHTML=html; $('#sheet').classList.add('on'); }
+function closeSheet(){ $('#sheet').classList.remove('on'); }
+$('#sheet').addEventListener('click',e=>{ if(e.target.id==='sheet') closeSheet(); });
+
+const TABS=[['today','Today'],['practice','Practice'],['mock','Mock'],['repo','Concepts'],['mentor','Mentors'],['you','You']];
+function drawTabs(){
+  $('#tabs').innerHTML=TABS.map(([k,l])=>`<button class="tab ${S.tab===k?'on':''}" data-t="${k}">${l}</button>`).join('');
+  $('#tabs').querySelectorAll('.tab').forEach(b=>b.onclick=()=>{S.tab=b.dataset.t;save();render()});
+}
+function chrome(){
+  $('#streak').textContent=S.streak+' day streak';
+  $('#signbtn').textContent=S.signed?'Profile':'Sign up';
+}
+
+/* ---------- views ---------- */
+function vToday(){
+  const done=Object.keys(S.answers).length>=3;
+  return `
+  <h1>Today's case</h1>
+  <p class="sub">${CASE.date}. One case. Three questions. One from each section.</p>
+  <div class="card" style="margin-top:16px">
+    <div class="row" style="margin-bottom:10px">
+      <span class="pill">Case 148</span><div class="spacer" style="flex:1"></div>
+      <span class="sm muted">Resets at midnight</span>
+    </div>
+    <h2>${CASE.title}</h2>
+    <p class="sub" style="margin-top:6px">A policy argument, the numbers under it, and the arithmetic those numbers hide.</p>
+    <div class="grid2" style="margin:14px 0 4px">
+      ${CASE.q.map(q=>`<span class="pill ${q.sec==='VARC'?'v':q.sec==='QA'?'q':'d'}">${q.sec}</span>`).join('')}
+    </div>
+    <div style="margin-top:16px">
+      ${done?`<button class="btn sec" onclick="showResult()">See your result</button>`
+             :`<button class="btn" onclick="startCase()">${Object.keys(S.answers).length?'Continue':'Start'}</button>`}
+    </div>
+    ${S.signed?'':'<div class="note">You can answer without an account. Signing up saves your record so the weak point read can build.</div>'}
+  </div>
+
+  <h2 style="margin-top:26px">Carry on</h2>
+  <div class="card row" style="cursor:pointer" onclick="S.tab='repo';save();render()">
+    <div style="flex:1"><h3>Percentage change on a shifting base</h3>
+      <p class="sm muted">Concept repo. Read it, then five questions that climb.</p></div>
+    <span class="pill q">Open</span>
+  </div>
+  <div class="card row" style="cursor:pointer" onclick="S.tab='mock';save();render()">
+    <div style="flex:1"><h3>Weekly mock</h3>
+      <p class="sm muted">Choose your own level, or sit the national paper.</p></div>
+    <span class="pill">Due</span>
+  </div>`;
+}
+
+function vPractice(){
+  return `
+  <h1>Practice</h1>
+  <p class="sub">Two ways through the same syllabus. Pick the one you will actually do.</p>
+
+  <div class="card" style="margin-top:16px">
+    <span class="pill q">Game mode</span>
+    <h2 style="margin-top:10px">Quick fire</h2>
+    <p class="sub">Thirty second questions, one at a time, scored on speed and accuracy. Streaks, leagues, the lot. Built for people who think on their feet.</p>
+    <div class="bar" style="margin:14px 0 10px"><i style="width:34%"></i></div>
+    <p class="sm muted" style="margin-bottom:12px">Arithmetic ladder, 17 of 50 cleared</p>
+    <button class="btn sm" onclick="sheet('<h2>Quick fire</h2><p class=sub style=margin-top:8px>Illustrative. The game track is specified in the plan and sits outside the MVP build.</p><button class=\\'btn sm\\' style=margin-top:16px onclick=closeSheet()>Close</button>')">Play</button>
+  </div>
+
+  <div class="card">
+    <span class="pill">Study mode</span>
+    <h2 style="margin-top:10px">Question repo</h2>
+    <p class="sub">Plain sets by concept, no timer, no points. Sit and solve until the topic is finished.</p>
+    <div style="margin-top:14px">
+      ${['Arithmetic','Algebra','Geometry','Number system','Modern maths','Parajumbles','RC','Set logic']
+        .map(t=>`<span class="pill" style="margin:0 6px 6px 0">${t}</span>`).join('')}
+    </div>
+    <button class="btn sm sec" style="margin-top:14px" onclick="S.tab='repo';save();render()">Open a topic</button>
+  </div>
+
+  <div class="note"><b>Why both.</b> Some people learn through a game. Some people find the game insulting and want to sit and solve. The syllabus underneath is identical.</div>`;
+}
+
+function vMock(){
+  return `
+  <h1>Weekly mock</h1>
+  <p class="sub">Same interface as the real exam. Choose the paper before you start.</p>
+
+  <div class="card" style="margin-top:16px">
+    <span class="pill v">Mode one</span>
+    <h2 style="margin-top:10px">Pegged to you</h2>
+    <p class="sub">Every concept in this paper is one you have already cleared. Nothing here should be unsolvable. What it measures is speed, accuracy and selection.</p>
+    <button class="btn sm" style="margin-top:14px" onclick="openMock('pegged')">Start pegged paper</button>
+  </div>
+
+  <div class="card">
+    <span class="pill d">Mode two</span>
+    <h2 style="margin-top:10px">National level</h2>
+    <p class="sub">Full CAT difficulty, the paper everyone sits. Expect questions you cannot do. That is the point.</p>
+    <button class="btn sm sec" style="margin-top:14px" onclick="openMock('national')">Start national paper</button>
+  </div>
+
+  <h2 style="margin-top:26px">After the last mock</h2>
+  <div class="card">
+    <h3 style="margin-bottom:10px">Your selection read</h3>
+    <p class="sm" style="margin-bottom:12px">Scored on which questions you chose to attempt, separate from whether you got them right.</p>
+    <div class="note" style="margin:0 0 8px"><b>You attempted 4 sets in DI/LR.</b> Two of them were in topics where your accuracy sits under 40 percent. You spent 19 minutes there and scored 2 marks.</div>
+    <div class="note" style="margin:0 0 8px"><b>You left set 3 untouched.</b> It was a seating arrangement, your strongest set type this month. 4 marks unclaimed.</div>
+    <div class="note" style="margin:0"><b>Net.</b> Attempting your two strongest sets instead would have moved you 6 marks without answering a single new question correctly.</div>
+  </div>`;
+}
+
+function vRepo(){
+  const q=REPO.quiz[S.repoStage];
+  return `
+  <h1>${REPO.title}</h1>
+  <p class="sub">Read it, then answer. The questions climb until you stop.</p>
+  <div class="card" style="margin-top:16px">
+    ${REPO.body.map(p=>`<p style="margin-bottom:11px">${p}</p>`).join('')}
+    <div class="note"><b>Video explanation.</b> Same concept, four minutes, for people who would rather watch it than read it.</div>
+  </div>
+  ${ q ? `
+  <div class="card">
+    <div class="row" style="margin-bottom:12px">
+      <span class="pill q">${q.lvl}</span>
+      <div class="spacer" style="flex:1"></div>
+      <span class="sm muted">${S.repoStage+1} of ${REPO.quiz.length} &nbsp;&middot;&nbsp; ${S.repoScore} right</span>
+    </div>
+    <h3 style="margin-bottom:14px">${q.stem}</h3>
+    ${q.opts.map((o,i)=>`<button class="opt" onclick="repoAns(${i})">${o}</button>`).join('')}
+  </div>`
+  : `<div class="card" style="text-align:center">
+      <h2>${S.repoScore} of ${REPO.quiz.length}</h2>
+      <p class="sub" style="margin:8px 0 16px">You went past CAT level on this concept.</p>
+      <button class="btn sm sec" onclick="S.repoStage=0;S.repoScore=0;save();render()">Run it again</button>
+    </div>` }`;
+}
+
+function vMentor(){
+  return `
+  <h1>Mentors</h1>
+  <p class="sub">Current students at the colleges you are aiming for. One credit is half an hour.</p>
+  <div class="card row" style="margin-top:16px">
+    <div style="flex:1"><h2>${S.credits} credits</h2><p class="sm muted">${S.credits/2} hours left this cycle</p></div>
+    <span class="pill v">Free</span>
+  </div>
+  ${MENTORS.map((m,i)=>`
+  <div class="card">
+    <div class="row">
+      <div style="flex:1">
+        <h3>${m.c}</h3>
+        <p class="sm muted">${m.y} &nbsp;&middot;&nbsp; ${m.bg}</p>
+      </div>
+      <button class="ghost" onclick="book(${i})">Book</button>
+    </div>
+    <div style="margin-top:10px"><span class="pill">${m.for}</span></div>
+  </div>`).join('')}
+  <div class="note"><b>How credits come back.</b> Earned through streaks, finished mocks and referrals. Never bought, because the constraint is mentor time rather than money.</div>`;
+}
+
+function vYou(){
+  const tags=S.tags.length?S.tags:null;
+  return `
+  <h1>You</h1>
+  <p class="sub">Built from what you answered. Nothing here was filled in by you.</p>
+
+  <div class="stats" style="margin-top:16px">
+    <div class="stat"><b>${Object.keys(S.answers).length}</b><span>Answered</span></div>
+    <div class="stat"><b>${S.streak}</b><span>Day streak</span></div>
+    <div class="stat"><b>${S.credits}</b><span>Credits</span></div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-bottom:12px">Weak points</h3>
+    ${ tags ? `
+      <div class="note" style="margin:0 0 8px"><b>QA, percentages.</b> Method was right, base was wrong. Seen once.</div>
+      <div class="note" style="margin:0 0 8px"><b>DI/LR, set logic.</b> Constraint misread. Seen once.</div>
+      <div class="note" style="margin:0"><b>VARC, summary.</b> Cleared.</div>`
+      : `<p class="sm muted">Answer today's case and this fills itself.</p>` }
+  </div>
+
+  <div class="card">
+    <h3 style="margin-bottom:8px">Where you stand</h3>
+    <p class="sm muted" style="margin-bottom:12px">Against the band directly above you, not against the toppers.</p>
+    <div class="bar"><i style="width:58%"></i></div>
+    <p class="sm muted" style="margin-top:8px">You moved up. So did the band. Net position held.</p>
+  </div>
+
+  ${S.signed?'':`<div class="card">
+    <h3>Finish your profile</h3>
+    <p class="sm muted" style="margin:6px 0 14px">Four questions. The read gets sharper with each one.</p>
+    <button class="btn sm" onclick="onboard()">Continue</button>
+  </div>`}`;
+}
+
+function vCase(){
+  const i=S.caseIdx, q=CASE.q[i], picked=S.answers[i];
+  const shown=picked!==undefined;
+  return `
+  <div class="row" style="margin:4px 0 14px">
+    <span class="pill ${q.sec==='VARC'?'v':q.sec==='QA'?'q':'d'}">${q.sec}</span>
+    <span class="sm muted">${q.type}</span>
+    <div class="spacer" style="flex:1"></div>
+    <span class="sm muted">${i+1} of 3</span>
+  </div>
+  <div class="bar" style="margin-bottom:16px"><i style="width:${(i)/3*100}%"></i></div>
+
+  <div class="passage">${CASE.passage.map(p=>`<p>${p}</p>`).join('')}</div>
+
+  <h3 style="margin-bottom:14px">${q.stem}</h3>
+  ${q.opts.map((o,k)=>{
+    let c='opt';
+    if(shown){ if(k===q.ans)c+=' right'; else if(k===picked)c+=' wrong'; }
+    return `<button class="${c}" ${shown?'':`onclick="pick(${k})"`}>${o}</button>`;
+  }).join('')}
+
+  ${shown?`
+    <div class="card" style="margin-top:14px">
+      <span class="pill ${picked===q.ans?'v':'d'}">${picked===q.ans?'Correct':'Missed'}</span>
+      <p style="margin-top:10px;font-size:15px">${q.why}</p>
+    </div>
+    <button class="btn" onclick="nextQ()">${i<2?'Next question':'See your result'}</button>
+  `:''}`;
+}
+
+/* ---------- actions ---------- */
+function startCase(){ S.caseIdx=0; save(); loader(()=>{S.tab='case';render()}); }
+function pick(k){
+  S.answers[S.caseIdx]=k;
+  if(k!==CASE.q[S.caseIdx].ans) S.tags.push(CASE.q[S.caseIdx].sec);
+  save(); render();
+}
+function nextQ(){
+  if(S.caseIdx<2){ S.caseIdx++; save(); render(); }
+  else showResult();
+}
+function showResult(){
+  const right=CASE.q.filter((q,i)=>S.answers[i]===q.ans).length;
+  S.streak=Math.max(S.streak,1); save(); chrome();
+  sheet(`
+    <h1>${right} of 3</h1>
+    <p class="sub" style="margin-bottom:16px">Today's case is done. It resets at midnight.</p>
+    <div class="stats">
+      <div class="stat"><b>${right}</b><span>Correct</span></div>
+      <div class="stat"><b>4:12</b><span>Your time</span></div>
+      <div class="stat"><b>6:30</b><span>Cohort avg</span></div>
+    </div>
+    <div class="note" style="margin-bottom:8px"><b>Percentages.</b> Your method was right and the base was wrong. That is a different fix from not knowing percentages.</div>
+    <div class="note" style="margin-bottom:16px"><b>Next.</b> One concept repo, five questions, about eight minutes.</div>
+    <button class="btn sm" onclick="closeSheet();S.tab='repo';save();render()">Open the repo</button>
+    <button class="btn sm sec" style="margin-top:8px" onclick="closeSheet();S.tab='you';save();render()">See your weak points</button>
+  `);
+}
+function repoAns(i){
+  const q=REPO.quiz[S.repoStage];
+  if(i===q.ans) S.repoScore++;
+  S.repoStage++; save();
+  loader(()=>render());
+}
+function book(i){
+  const m=MENTORS[i];
+  if(S.credits<1){ sheet('<h2>No credits left</h2><p class=sub style=margin-top:8px>Finish a mock or keep a streak to earn them back.</p>'); return; }
+  sheet(`<h2>${m.c}</h2><p class="sub" style="margin:6px 0 14px">${m.bg}</p>
+    <div class="note" style="margin-bottom:14px"><b>1 credit.</b> Thirty minutes. ${m.for}.</div>
+    <button class="btn sm" onclick="S.credits--;save();closeSheet();render()">Confirm booking</button>
+    <button class="btn sm sec" style="margin-top:8px" onclick="closeSheet()">Not now</button>`);
+}
+function onboard(){
+  sheet(`
+    <span class="pill">Step 1 of 4</span>
+    <h2 style="margin:10px 0 4px">How much work experience?</h2>
+    <p class="sub" style="margin-bottom:16px">Pegs, because the scoring curves use pegs.</p>
+    ${['None','1 month','3 months','6 months','12 months','24 months','More than 2 years']
+      .map(o=>`<button class="opt" onclick="S.signed=true;S.profile='${o}';save();closeSheet();chrome();render()">${o}</button>`).join('')}
+    <p class="sm muted" style="margin-top:10px">You can close this. The daily case works either way.</p>`);
+}
+$('#signbtn').onclick=onboard;
+
+/* ---------- mock engine ---------- */
+const MOCKQ=Array.from({length:12},(_,i)=>({
+  stem: i===0 ? 'The hardest substance available on earth is'
+       : `Question ${i+1}. Illustrative item in the mock environment.`,
+  opts: i===0 ? ['Gold','Iron','Diamond','Platinum'] : ['Option A','Option B','Option C','Option D']
+}));
+let MK={i:0,ans:{},mark:{},vis:{},t:2400,timer:null};
+function openMock(mode){
+  MK={i:0,ans:{},mark:{},vis:{0:1},t:mode==='pegged'?2400:2400,timer:null};
+  $('#mkmode').textContent = mode==='pegged' ? 'Pegged to your level' : 'National level';
+  $('#mock').classList.add('on');
+  drawMock();
+  MK.timer=setInterval(()=>{
+    MK.t--; const m=String(Math.floor(MK.t/60)).padStart(2,'0'), s=String(MK.t%60).padStart(2,'0');
+    $('#mktime').textContent=m+':'+s; if(MK.t<=0) endMock();
+  },1000);
+}
+function drawMock(){
+  const q=MOCKQ[MK.i]; MK.vis[MK.i]=1;
+  $('#mkq').innerHTML=`
+    <div class="meta">Question Type : MCQ</div>
+    <div class="marks">Marks for correct answer <b style="color:#22a04a">3</b> &nbsp; Negative Marks <b style="color:#c0392b">1</b></div>
+    <p style="font-weight:700;margin-bottom:12px">Question No. ${MK.i+1}</p>
+    <p style="margin-bottom:14px">${q.stem}</p>
+    ${q.opts.map((o,k)=>`<label><input type="radio" name="o" ${MK.ans[MK.i]===k?'checked':''} onchange="MK.ans[${MK.i}]=${k};drawPal()"> ${o}</label>`).join('')}`;
+  drawPal();
+}
+function drawPal(){
+  let a=0,n=0,nv=0,mk=0;
+  $('#mkpal').innerHTML=MOCKQ.map((_,i)=>{
+    let c=''; if(MK.mark[i]){c='';mk++;} if(MK.ans[i]!==undefined){c='ans';a++;}
+    else if(MK.vis[i]){c='notans';n++;} else {nv++;}
+    return `<button class="${c} ${i===MK.i?'cur':''}" onclick="MK.i=${i};drawMock()">${i+1}</button>`;
+  }).join('');
+  $('#c-ans').textContent=a; $('#c-not').textContent=n; $('#c-nv').textContent=nv; $('#c-mark').textContent=mk;
+}
+$('#mksave').onclick=()=>{ if(MK.i<MOCKQ.length-1){MK.i++;drawMock();} };
+$('#mkmark').onclick=()=>{ MK.mark[MK.i]=1; if(MK.i<MOCKQ.length-1){MK.i++;} drawMock(); };
+$('#mkclear').onclick=()=>{ delete MK.ans[MK.i]; drawMock(); };
+$('#mkend').onclick=()=>endMock();
+function endMock(){
+  clearInterval(MK.timer); $('#mock').classList.remove('on');
+  const att=Object.keys(MK.ans).length;
+  sheet(`<h1>Mock submitted</h1>
+    <p class="sub" style="margin-bottom:16px">Attempted ${att} of ${MOCKQ.length}.</p>
+    <div class="note" style="margin-bottom:8px"><b>Selection read.</b> Scored on what you chose to attempt, separate from what you got right.</div>
+    <div class="note" style="margin-bottom:16px"><b>Next.</b> Your weak point list updates from this paper.</div>
+    <button class="btn sm" onclick="closeSheet();S.tab='you';save();render()">See it</button>`);
+}
+
+/* ---------- render ---------- */
+function render(){
+  chrome(); drawTabs();
+  const v={today:vToday,practice:vPractice,mock:vMock,repo:vRepo,mentor:vMentor,you:vYou,case:vCase}[S.tab];
+  view.innerHTML=v?v():vToday();
+  if(S.tab==='case') $('#tabs').style.display='none'; else $('#tabs').style.display='flex';
+  window.scrollTo(0,0);
+}
+render();
+</script>
 </body>
 </html>
