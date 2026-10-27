@@ -4,198 +4,331 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Meridian Prep</title>
+<meta name="description" content="The free CAT platform that tells you why you got it wrong.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#ffffff; --surface:#ffffff; --raise:#f7f8f9; --fg:#14181b; --muted:#6b757d;
-  --line:#e6e9eb; --brand:#1cb37a; --brand-d:#169966; --hot:#e23744; --warm:#f5a623;
-  --shadow:0 1px 0 var(--line);
-}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#101315; --surface:#161a1d; --raise:#1c2125; --fg:#eef1f3; --muted:#98a2aa;
-  --line:#252b30; --brand:#2ad08f; --brand-d:#1cb37a; --hot:#ff5a66; --warm:#ffbe4d;
-}}
-:root[data-theme="dark"]{
-  --bg:#101315; --surface:#161a1d; --raise:#1c2125; --fg:#eef1f3; --muted:#98a2aa;
-  --line:#252b30; --brand:#2ad08f; --brand-d:#1cb37a; --hot:#ff5a66; --warm:#ffbe4d;
+  --ink:#141414; --ink2:#5b5b57; --ink3:#8d8d86;
+  --paper:#fbfaf7; --card:#ffffff; --line:#e8e5de;
+  --green:#3cb46e; --green-d:#2a8f54; --amber:#f0a13c; --rose:#e0614f; --blue:#3f7ce0;
+  --r:16px; --maxw:1120px;
+  --ease:cubic-bezier(.16,1,.3,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--fg);font:16px/1.55 Nunito,ui-sans-serif,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
-.wrap{max-width:720px;margin:0 auto;padding:0 16px 120px}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.6 Nunito,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.serif{font-family:Fraunces,Georgia,serif;font-weight:400;font-style:italic;letter-spacing:-.01em}
+a{color:inherit}
 button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
-/* top */
-.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
-.top .wrap{display:flex;align-items:center;gap:12px;height:60px;padding-top:0;padding-bottom:0}
-.logo{font-weight:800;letter-spacing:-.02em;font-size:18px}
-.logo span{color:var(--brand)}
-.spacer{flex:1}
-.streak{display:flex;align-items:center;gap:5px;font-weight:700;font-size:14px;color:var(--warm)}
-.ghost{padding:7px 14px;border-radius:999px;border:1.5px solid var(--line);font-weight:700;font-size:14px}
-.ghost:hover{border-color:var(--brand)}
+/* reveal */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* buttons, duolingo physics */
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:15px;letter-spacing:.01em;
+  padding:14px 24px;border-radius:14px;background:var(--green);color:#fff;
+  box-shadow:0 4px 0 var(--green-d);transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translateY(4px);box-shadow:0 0 0 var(--green-d)}
+.btn.ghost{background:var(--card);color:var(--ink);box-shadow:0 4px 0 var(--line);border:2px solid var(--line)}
+.btn.ghost:active{transform:translateY(4px);box-shadow:0 0 0 var(--line)}
+.btn.sm{padding:10px 16px;font-size:14px;border-radius:12px;box-shadow:0 3px 0 var(--green-d)}
+.btn.sm:active{transform:translateY(3px)}
 
 /* nav */
-.tabs{display:flex;gap:4px;overflow-x:auto;padding:14px 0 2px;scrollbar-width:none}
-.tabs::-webkit-scrollbar{display:none}
-.tab{white-space:nowrap;padding:8px 14px;border-radius:999px;font-weight:700;font-size:14px;color:var(--muted)}
-.tab.on{background:var(--raise);color:var(--fg)}
+.nav{position:sticky;top:0;z-index:60;background:rgba(251,250,247,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:28px;height:68px}
+.logo{font-family:Fraunces,serif;font-style:italic;font-weight:600;font-size:21px;letter-spacing:-.02em}
+.logo b{font-style:normal;font-weight:900;font-family:Nunito,sans-serif;font-size:19px}
+.navlinks{display:flex;gap:4px;margin-left:12px}
+.navlinks button{padding:8px 14px;border-radius:10px;font-weight:700;font-size:14px;color:var(--ink2);transition:background .15s,color .15s}
+.navlinks button:hover{background:#f0ede6;color:var(--ink)}
+.navlinks button.on{background:var(--ink);color:#fff}
+.navr{margin-left:auto;display:flex;align-items:center;gap:12px}
+.streak{display:flex;align-items:center;gap:6px;font-weight:800;font-size:14px;color:var(--amber);
+  background:#fdf3e4;border:1px solid #f6e0bd;padding:7px 13px;border-radius:999px}
 
-/* generic */
-h1{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-bottom:6px}
-h2{font-size:19px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px}
-h3{font-size:15px;font-weight:700}
-.sub{color:var(--muted);font-size:15px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:12px}
-.row{display:flex;align-items:center;gap:12px}
-.pill{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;
-  padding:4px 9px;border-radius:999px;background:var(--raise);color:var(--muted)}
-.pill.v{color:var(--brand)}.pill.d{color:var(--hot)}.pill.q{color:var(--warm)}
-.btn{display:block;width:100%;text-align:center;background:var(--brand);color:#06231a;
-  font-weight:800;padding:15px;border-radius:14px;box-shadow:0 4px 0 var(--brand-d);
-  transition:transform .06s,box-shadow .06s}
-.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--brand-d)}
-.btn.sec{background:var(--raise);color:var(--fg);box-shadow:0 4px 0 var(--line)}
-.btn.sm{padding:11px;font-size:14px;border-radius:12px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.muted{color:var(--muted)}
-.sm{font-size:13px}
+/* hero */
+.hero{position:relative;padding:76px 0 64px;overflow:hidden}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:12.5px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--green-d);background:#e8f6ee;border:1px solid #c9e9d6;padding:7px 14px;border-radius:999px}
+.hero h1{font-family:Fraunces,serif;font-style:italic;font-weight:400;font-size:clamp(36px,6.2vw,70px);
+  line-height:1.03;letter-spacing:-.025em;margin:26px auto 0;max-width:15ch;text-align:center}
+.hero h1 em{font-style:normal;font-weight:600;background:linear-gradient(transparent 62%,#ffe08a 62%)}
+.hero .sub{margin:24px auto 0;max-width:56ch;text-align:center;font-size:18px;color:var(--ink2)}
+.hero .cta{display:flex;gap:12px;justify-content:center;margin-top:34px;flex-wrap:wrap}
+.hero .note{text-align:center;margin-top:16px;font-size:13.5px;color:var(--ink3)}
+.squig{position:absolute;pointer-events:none;opacity:.9}
+.squig.l{left:-10px;top:90px;width:150px}
+.squig.r{right:-30px;top:40px;width:230px}
+@media(max-width:820px){.squig{display:none}}
 
-/* option */
-.opt{display:block;width:100%;text-align:left;border:2px solid var(--line);border-radius:14px;
-  padding:14px 16px;margin-bottom:9px;font-weight:600;transition:border-color .1s,background .1s}
-.opt:hover{border-color:var(--brand)}
-.opt.pick{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 12%,transparent)}
-.opt.right{border-color:var(--brand);background:color-mix(in srgb,var(--brand) 16%,transparent)}
-.opt.wrong{border-color:var(--hot);background:color-mix(in srgb,var(--hot) 12%,transparent)}
+/* wordle tiles */
+.tiles{display:flex;gap:8px;justify-content:center;margin-top:44px}
+.tile{width:46px;height:46px;border-radius:11px;border:2px solid var(--line);background:var(--card);
+  display:grid;place-items:center;font-weight:900;font-size:17px;color:var(--ink3);
+  animation:flip .5s var(--ease) both}
+.tile.ok{background:var(--green);border-color:var(--green);color:#fff}
+.tile.part{background:var(--amber);border-color:var(--amber);color:#fff}
+@keyframes flip{from{transform:rotateX(-90deg);opacity:0}to{transform:none;opacity:1}}
 
-/* progress */
-.bar{height:10px;background:var(--raise);border-radius:999px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--brand);border-radius:999px;transition:width .3s}
+/* sections */
+section{padding:72px 0}
+.shead{text-align:center;margin-bottom:44px}
+.shead .k{font-weight:800;font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3)}
+.shead h2{font-family:Fraunces,serif;font-style:italic;font-weight:400;font-size:clamp(28px,4vw,44px);
+  line-height:1.1;letter-spacing:-.02em;margin-top:12px}
+.shead p{margin:14px auto 0;max-width:58ch;color:var(--ink2)}
 
-.passage{background:var(--raise);border-radius:12px;padding:16px;font-size:15px;line-height:1.65;
-  max-height:260px;overflow:auto;margin-bottom:14px}
-.passage p{margin-bottom:10px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:900px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.g2,.g3,.g4{grid-template-columns:1fr}}
 
-/* stat */
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
-.stat{background:var(--raise);border-radius:14px;padding:14px;text-align:center}
-.stat b{display:block;font-size:22px;font-weight:800;letter-spacing:-.02em}
-.stat span{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(20,20,20,.06)}
+.card h3{font-size:17px;font-weight:800;margin-bottom:8px}
+.card p{font-size:14.5px;color:var(--ink2)}
+.chip{display:inline-block;font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
+  padding:5px 10px;border-radius:999px;background:#f0ede6;color:var(--ink2)}
 
-/* mock shell */
-.mock{position:fixed;inset:0;z-index:60;background:#fff;color:#111;display:none;
-  font:14px/1.45 Arial,Helvetica,sans-serif}
-.mock.on{display:flex;flex-direction:column}
-.mk-top{background:#2d3a46;color:#fff;padding:7px 12px;display:flex;align-items:center;gap:16px;font-size:13px}
-.mk-top b{font-weight:700}
-.mk-sec{background:#eef1f4;border-bottom:1px solid #c9d2da;padding:6px 12px;display:flex;align-items:center;gap:8px}
-.mk-sec button{padding:5px 14px;border-radius:3px 3px 0 0;font-size:13px;color:#2a6496}
-.mk-sec button.on{background:#2a6496;color:#fff;font-weight:700}
-.mk-time{margin-left:auto;font-weight:700;font-size:13px;color:#111}
-.mk-body{flex:1;display:flex;min-height:0}
-.mk-q{flex:1;overflow:auto;padding:14px 16px;border-right:1px solid #c9d2da}
-.mk-q .meta{color:#c0392b;font-weight:700;font-size:12px;margin-bottom:8px}
-.mk-q .marks{text-align:right;font-size:12px;color:#444;margin-bottom:10px}
-.mk-q label{display:block;margin:7px 0;cursor:pointer}
-.mk-side{width:252px;background:#eaf2f8;overflow:auto;padding:10px}
-.lg{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;margin-bottom:10px}
-.lg div{display:flex;align-items:center;gap:5px}
-.dot{width:20px;height:20px;border-radius:4px;color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700}
-.palette{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:8px}
-.palette button{height:34px;border-radius:5px;background:#d9d9d9;color:#333;font-weight:700;font-size:13px}
-.palette button.ans{background:#22a04a;color:#fff}
-.palette button.notans{background:#e2574c;color:#fff}
-.palette button.cur{outline:3px solid #f5a623}
-.mk-foot{border-top:1px solid #c9d2da;padding:9px 12px;display:flex;gap:8px;align-items:center;background:#f7f9fa}
-.mk-foot button{padding:9px 14px;border-radius:4px;background:#dfe6ec;font-size:13px;font-weight:700;color:#234}
-.mk-foot .save{margin-left:auto;background:#22a04a;color:#fff}
+/* poke section */
+.poke{background:var(--ink);color:#fff;border-radius:28px;padding:56px 32px;margin:0 24px}
+.poke h2{font-family:Fraunces,serif;font-style:italic;font-weight:400;font-size:clamp(28px,4.4vw,48px);
+  line-height:1.08;text-align:center;letter-spacing:-.02em;max-width:18ch;margin:0 auto}
+.poke .sub{text-align:center;color:#a8a8a2;margin:18px auto 40px;max-width:56ch}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:880px;margin:0 auto}
+@media(max-width:700px){.vs{grid-template-columns:1fr}}
+.vs .col{background:#1f1f1e;border:1px solid #2e2e2c;border-radius:var(--r);padding:20px}
+.vs .col.good{background:#16301f;border-color:#235c38}
+.vs .col .k{font-size:11.5px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:#8d8d86;margin-bottom:14px}
+.vs .col.good .k{color:#6fd79b}
+.vs li{list-style:none;padding:11px 0;border-top:1px solid #2e2e2c;font-size:14.5px;color:#d6d6d2}
+.vs .col.good li{border-color:#235c38}
+.vs li:first-of-type{border-top:0}
+
+/* mentors, mentorunion layout */
+.mentorbar{display:grid;grid-template-columns:240px 1fr;gap:20px}
+@media(max-width:860px){.mentorbar{grid-template-columns:1fr}}
+.rail{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:10px;height:fit-content}
+.rail button{display:block;width:100%;text-align:left;padding:12px 14px;border-radius:11px;font-weight:700;
+  font-size:14.5px;color:var(--ink2);border-bottom:1px solid var(--line);transition:color .15s,background .15s}
+.rail button:last-child{border-bottom:0}
+.rail button.on{color:var(--green-d);background:#e8f6ee}
+.mcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.mcard:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(20,20,20,.08)}
+.mcard .ph{height:168px;background:#ece9e2;position:relative;overflow:hidden}
+.mcard .ph img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;display:block}
+.mcard .ph .ini{position:absolute;inset:0;z-index:0;display:grid;place-items:center;font-family:Fraunces,serif;
+  font-style:italic;font-size:44px;color:#fff}
+.mcard .bd{padding:16px}
+.mcard h4{font-size:16.5px;font-weight:800}
+.mcard .role{font-size:13.5px;color:var(--ink2);margin-top:3px}
+.mcard .yrs{font-size:13px;color:var(--ink3);margin-top:3px;font-family:Fraunces,serif;font-style:italic}
+.mcard .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px;padding-top:13px;border-top:1px solid var(--line)}
+.tag{font-size:11.5px;font-weight:700;padding:5px 9px;border-radius:8px;background:#f3f1ea;color:var(--ink2)}
+
+/* popup, full screen daily case */
+.scrim{position:fixed;inset:0;z-index:90;background:rgba(10,10,10,.62);backdrop-filter:blur(5px);
+  opacity:0;pointer-events:none;transition:opacity .34s var(--ease)}
+.scrim.on{opacity:1;pointer-events:auto}
+.pop{position:fixed;z-index:91;inset:28px;max-width:860px;margin:0 auto;background:var(--paper);
+  border-radius:24px;overflow:auto;opacity:0;transform:translateY(26px) scale(.985);pointer-events:none;
+  transition:opacity .36s var(--ease),transform .36s var(--ease);box-shadow:0 30px 80px rgba(0,0,0,.3)}
+.pop.on{opacity:1;transform:none;pointer-events:auto}
+@media(max-width:700px){.pop{inset:0;border-radius:0}}
+.pop .ph{position:sticky;top:0;background:rgba(251,250,247,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);padding:16px 26px;display:flex;align-items:center;gap:12px;z-index:2}
+.pop .ph .t{font-weight:900;font-size:15px}
+.pop .ph .d{font-size:13px;color:var(--ink3);font-family:Fraunces,serif;font-style:italic}
+.pop .x{margin-left:auto;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+  font-size:19px;color:var(--ink2);background:#f0ede6}
+.pop .pb{padding:26px}
+.prog{height:9px;background:#ece9e2;border-radius:999px;overflow:hidden;margin:0 26px 20px}
+.prog i{display:block;height:100%;background:var(--green);border-radius:999px;transition:width .5s var(--ease)}
+
+.passage{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;margin-bottom:22px}
+.passage p{margin-bottom:13px;font-size:15.5px;color:var(--ink2)}
+.passage p:last-child{margin:0}
+.qstem{font-size:17.5px;font-weight:700;line-height:1.45;margin:4px 0 18px}
+.opt{display:block;width:100%;text-align:left;background:var(--card);border:2px solid var(--line);
+  border-radius:14px;padding:15px 18px;margin-bottom:10px;font-size:15px;font-weight:600;
+  transition:border-color .15s,background .15s,transform .1s}
+.opt:hover{border-color:#cfcabd}
+.opt:active{transform:scale(.995)}
+.opt.ok{border-color:var(--green);background:#e8f6ee}
+.opt.no{border-color:var(--rose);background:#fdeeec}
+.why{margin-top:16px;background:#fdf3e4;border:1px solid #f6e0bd;border-radius:14px;padding:17px}
+.why .k{font-size:11.5px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#a9731f;margin-bottom:7px}
+.why p{font-size:14.5px;color:#6b4d16}
+
+/* result */
+.scorebig{font-family:Fraunces,serif;font-style:italic;font-size:64px;line-height:1;text-align:center}
+.pcpill{display:block;width:fit-content;margin:16px auto 0;font-weight:900;font-size:14px;
+  background:var(--ink);color:#fff;padding:9px 18px;border-radius:999px}
+
+/* app views */
+.view{padding:36px 0 80px}
+.ph1{font-family:Fraunces,serif;font-style:italic;font-size:34px;letter-spacing:-.02em}
+.psub{color:var(--ink2);margin-top:8px;margin-bottom:26px}
+
+/* mock */
+.mock{position:fixed;inset:0;z-index:95;background:#fff;display:none;flex-direction:column;font-family:Arial,sans-serif}
+.mock.on{display:flex}
+.mock .mh{background:#2b3f6b;color:#fff;padding:11px 16px;display:flex;align-items:center;gap:14px;font-size:14px}
+.mock .mb{flex:1;display:grid;grid-template-columns:1fr 268px;overflow:hidden}
+.mock .mq{padding:22px;overflow:auto}
+.mock .mp{border-left:1px solid #ccc;background:#f4f6fa;padding:14px;overflow:auto}
+.pal{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}
+.pal b{display:grid;place-items:center;height:36px;border-radius:6px;font-size:13px;background:#d9d9d9;cursor:pointer}
+.pal b.ans{background:#2fa84f;color:#fff}.pal b.mark{background:#6c3fa0;color:#fff}.pal b.cur{outline:3px solid #2b3f6b}
+.mf{border-top:1px solid #ccc;padding:11px 16px;display:flex;gap:10px;background:#f4f6fa}
+.mf button{padding:9px 16px;border:1px solid #999;border-radius:4px;background:#fff;font-size:13px}
+.mf .go{background:#2b3f6b;color:#fff;border-color:#2b3f6b;margin-left:auto}
 
 /* loader */
-.loader{position:fixed;inset:0;z-index:80;background:var(--bg);display:none;
-  flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;text-align:center}
+.loader{position:fixed;inset:0;z-index:99;background:var(--paper);display:none;
+  flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:40px}
 .loader.on{display:flex}
-.spin{width:34px;height:34px;border:4px solid var(--line);border-top-color:var(--brand);
-  border-radius:50%;animation:s .7s linear infinite}
-@keyframes s{to{transform:rotate(360deg)}}
-.loader p{max-width:330px;font-size:14px;color:var(--muted);font-weight:600}
+.spin{width:38px;height:38px;border:4px solid var(--line);border-top-color:var(--green);border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.loader p{max-width:42ch;text-align:center;color:var(--ink2);font-size:15.5px}
 
-/* sheet */
-.sheet{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.45);display:none;align-items:flex-end}
-.sheet.on{display:flex}
-.sheet .in{background:var(--surface);width:100%;max-width:720px;margin:0 auto;
-  border-radius:20px 20px 0 0;padding:22px 18px 28px}
-@media(min-width:721px){.sheet{align-items:center}.sheet .in{border-radius:20px}}
+footer{border-top:1px solid var(--line);padding:40px 0;color:var(--ink3);font-size:14px}
 
-.note{background:var(--raise);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--muted);margin-top:10px}
-.note b{color:var(--fg)}
-hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+/* ---- dark band ---- */
+.dark{background:var(--ink);color:#fff}
+.dark .shead .k{color:#8d8d86}
+.dark .shead p{color:#a8a8a2}
+.band{position:relative;overflow:hidden}
+.wm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  font-family:Fraunces,serif;font-style:italic;font-size:30vw;line-height:1;color:#efece4;
+  pointer-events:none;user-select:none;z-index:0;white-space:nowrap}
+.dark .wm{color:#1c1c1b}
+.band .wrap{position:relative;z-index:1}
+
+/* ---- hero, dark ---- */
+.hero2{position:relative;background:var(--ink);color:#fff;overflow:hidden;padding:88px 0 96px;min-height:min(78vh,680px);display:flex;align-items:center}
+.hero2 .mix{font-family:Nunito,sans-serif;font-weight:800;font-size:clamp(34px,6vw,66px);line-height:1.06;
+  letter-spacing:-.03em;text-align:center;max-width:16ch;margin:26px auto 0}
+.hero2 .mix i{font-family:Fraunces,serif;font-style:italic;font-weight:400;letter-spacing:-.015em;
+  background:linear-gradient(92deg,#6fd79b,#ffd166 45%,#f0a13c);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero2 .sub{margin:22px auto 0;max-width:52ch;text-align:center;color:#a8a8a2;font-size:17px}
+.hero2 .eyebrow{display:block;width:fit-content;margin:0 auto;font-weight:800;font-size:12px;letter-spacing:.11em;
+  text-transform:uppercase;color:#6fd79b;border:1px solid #2d4a39;background:#16301f;padding:7px 15px;border-radius:999px}
+.pill{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:14.5px;padding:13px 24px;
+  border-radius:999px;border:1.5px solid rgba(255,255,255,.35);color:#fff;transition:background .2s,border-color .2s,transform .1s}
+.pill:hover{background:rgba(255,255,255,.1);border-color:#fff}
+.pill:active{transform:scale(.97)}
+.pill.solid{background:var(--green);border-color:var(--green);box-shadow:0 4px 0 var(--green-d)}
+.pill.solid:active{transform:translateY(4px);box-shadow:0 0 0 var(--green-d)}
+.pill.dk{border-color:rgba(20,20,20,.25);color:var(--ink)}
+.pill.dk:hover{background:rgba(20,20,20,.06);border-color:var(--ink)}
+
+/* orbiting avatars */
+.orb{position:absolute;inset:0;pointer-events:none}
+.orb svg{position:absolute;inset:0;width:100%;height:100%;opacity:.16}
+.av{position:absolute;width:52px;height:52px;border-radius:50%;overflow:hidden;border:2px solid rgba(255,255,255,.5);
+  box-shadow:0 8px 24px rgba(0,0,0,.4);animation:bob 7s ease-in-out infinite}
+.av img{width:100%;height:100%;object-fit:cover}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+@media(max-width:860px){.av{display:none}.orb svg{display:none}}
+
+/* squiggle heading */
+.sq{display:block;width:118px;height:14px;margin:8px auto 0}
+.quote{font-family:Fraunces,serif;font-style:italic;font-size:clamp(23px,3.4vw,38px);line-height:1.3;
+  text-align:center;max-width:22ch;margin:0 auto;letter-spacing:-.015em}
+
+/* case band */
+.casebar{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:34px 28px;text-align:center;
+  box-shadow:0 18px 50px rgba(20,20,20,.05)}
+.casebar .k{font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.casebar h3{font-family:Fraunces,serif;font-style:italic;font-size:clamp(23px,3vw,34px);margin-top:10px;letter-spacing:-.02em}
+.metarow{display:flex;gap:26px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+.metarow div{text-align:center}
+.metarow b{display:block;font-family:Fraunces,serif;font-style:italic;font-size:27px;line-height:1}
+.metarow span{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3)}
+
+/* cause cards */
+.cause{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;position:relative;overflow:hidden}
+.cause .n{font-family:Fraunces,serif;font-style:italic;font-size:46px;line-height:1;color:var(--line)}
+.cause h3{margin-top:10px;font-size:17px;font-weight:800}
+.cause p{font-size:14.5px;color:var(--ink2);margin-top:7px}
+.cause .sig{margin-top:14px;padding-top:13px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink3)}
+.cause .sig b{color:var(--ink2)}
+
 </style>
 </head>
 <body>
 
 <div class="loader" id="loader"><div class="spin"></div><p id="loadmsg"></p></div>
 
-<header class="top"><div class="wrap">
-  <div class="logo">meridian<span>.</span></div>
-  <div class="spacer"></div>
-  <div class="streak" id="streak">0 day streak</div>
-  <button class="ghost" id="signbtn">Sign up</button>
-</div></header>
+<nav class="nav"><div class="wrap">
+  <div class="logo">meridian<b>.</b></div>
+  <div class="navlinks" id="navlinks"></div>
+  <div class="navr">
+    <div class="streak" id="streakpill">&#128293; <span id="streakn">0</span></div>
+    <button class="btn sm" id="signbtn" onclick="onboard()">Sign up</button>
+  </div>
+</div></nav>
 
-<div class="wrap">
-  <nav class="tabs" id="tabs"></nav>
-  <main id="view"></main>
+<main id="view"></main>
+
+<div class="scrim" id="scrim" onclick="closePop()"></div>
+<div class="pop" id="pop">
+  <div class="ph">
+    <div><div class="t">Today's case</div><div class="d" id="popdate"></div></div>
+    <button class="x" onclick="closePop()">&#10005;</button>
+  </div>
+  <div class="prog"><i id="progbar" style="width:0"></i></div>
+  <div class="pb" id="popbody"></div>
 </div>
 
-<!-- mock -->
 <div class="mock" id="mock">
-  <div class="mk-top">
+  <div class="mh">
     <b>Meridian Mock</b>
-    <span id="mkmode"></span>
-    <span class="spacer" style="flex:1"></span>
-    <span>Question Paper</span><span>Instructions</span>
+    <span id="mocksec"></span>
+    <span style="margin-left:auto">Time left <b id="mocktime">40:00</b></span>
   </div>
-  <div class="mk-sec">
-    <span style="font-size:12px;color:#555">Section</span>
-    <button class="on" id="mksecname">VARC</button>
-    <span class="mk-time">Time Left : <b id="mktime">40:00</b></span>
-  </div>
-  <div class="mk-body">
-    <div class="mk-q" id="mkq"></div>
-    <div class="mk-side">
-      <div class="lg">
-        <div><i class="dot" style="background:#22a04a" id="c-ans">0</i> Answered</div>
-        <div><i class="dot" style="background:#e2574c" id="c-not">0</i> Not Answered</div>
-        <div><i class="dot" style="background:#d9d9d9;color:#333" id="c-nv">0</i> Not Visited</div>
-        <div><i class="dot" style="background:#7b4fa8" id="c-mark">0</i> Marked</div>
+  <div class="mb">
+    <div class="mq" id="mockq"></div>
+    <div class="mp">
+      <div style="font-size:13px;line-height:2">
+        <div><span style="display:inline-block;width:12px;height:12px;background:#2fa84f;border-radius:3px"></span> Answered <b id="cAns">0</b></div>
+        <div><span style="display:inline-block;width:12px;height:12px;background:#d9d9d9;border-radius:3px"></span> Not answered <b id="cNo">12</b></div>
+        <div><span style="display:inline-block;width:12px;height:12px;background:#6c3fa0;border-radius:3px"></span> Marked <b id="cMk">0</b></div>
       </div>
-      <div style="background:#2a6496;color:#fff;padding:5px 8px;font-size:12px;font-weight:700">Choose a Question</div>
-      <div class="palette" id="mkpal"></div>
+      <div class="pal" id="pal"></div>
     </div>
   </div>
-  <div class="mk-foot">
-    <button id="mkmark">Mark for Review &amp; Next</button>
-    <button id="mkclear">Clear Response</button>
-    <button class="save" id="mksave">Save &amp; Next</button>
-    <button id="mkend" style="background:#c0392b;color:#fff">Submit</button>
+  <div class="mf">
+    <button onclick="clearResp()">Clear Response</button>
+    <button onclick="markRev()">Mark for Review &amp; Next</button>
+    <button onclick="saveNext()">Save &amp; Next</button>
+    <button class="go" onclick="endMock()">Submit</button>
   </div>
 </div>
 
-<div class="sheet" id="sheet"><div class="in" id="sheetin"></div></div>
-
+<footer><div class="wrap">
+  Meridian Prep, a Round 2 prototype for Ace the Case 2026.
+  Free, and it stays free.
+</div></footer>
 <script>
 /* ---------- state ---------- */
 const S = {
   tab:'today', streak:0, signed:false, profile:null,
   credits:10, caseIdx:0, answers:{}, times:{}, tStart:0,
-  tags:[], repoStage:0, repoScore:0, mock:null
+  tags:[], repoStage:0, repoScore:0, mock:null, caseDone:false, casePct:null
 };
 try{ Object.assign(S, JSON.parse(localStorage.getItem('mp')||'{}')); }catch(e){}
 const save=()=>{try{localStorage.setItem('mp',JSON.stringify(S))}catch(e){}};
-
-/* ---------- content ---------- */
 const CASE = {
   date: new Date().toLocaleDateString('en-IN',{day:'numeric',month:'long'}),
   title: "The Forest Act and the people inside it",
@@ -244,13 +377,6 @@ const REPO = {
   ]
 };
 
-const MENTORS = [
-  {n:'Mentor A', c:'IIM Bangalore', y:'PGP 2026-28', bg:'Non-engineer, converted at 98.4 with diversity weight', for:'Profile read, PI'},
-  {n:'Mentor B', c:'IIM Calcutta', y:'PGP 2025-27', bg:'Private college GEM, cleared on second attempt', for:'QA method, mock strategy'},
-  {n:'Mentor C', c:'IIM Ahmedabad', y:'PGP 2026-28', bg:'27 months work ex, Big 4', for:'WAT, GD, work ex framing'},
-  {n:'Mentor D', c:'IIM Lucknow', y:'PGP 2025-27', bg:'Commerce background, VARC specialist', for:'VARC, parajumbles, summary'}
-];
-
 const LOADMSG = [
   'Students who answer the daily case four days a week move a full band in six weeks.',
   'Two in three people who clear CAT took between 20 and 45 full mocks.',
@@ -258,344 +384,449 @@ const LOADMSG = [
   'About 35 percent of people who get in do it on their second or third attempt.',
   'Most people who cleared it studied two to three hours on a weekday. Not five.'
 ];
+const DOMAINS = ['All mentors','Profile & shortlist','VARC','Quant & DILR','WAT & GD','Personal interview','Work ex framing'];
+const MENTORS = [
+  {n:'Mentor A', role:'PGP 2026-28, IIM Bangalore', org:'Non-engineer, diversity weight', yrs:'Converted at 98.4',
+   img:'https://i.pravatar.cc/400?img=47', c:'#3cb46e', dom:['Profile & shortlist','Personal interview'],
+   tags:['Profile read','PI mocks','Shortlist maths','Diversity framing']},
+  {n:'Mentor B', role:'PGP 2025-27, IIM Calcutta', org:'Private college GEM', yrs:'Cleared on the second attempt',
+   img:'https://i.pravatar.cc/400?img=12', c:'#3f7ce0', dom:['Quant & DILR'],
+   tags:['QA method','Mock strategy','Set selection','Second attempt plan']},
+  {n:'Mentor C', role:'PGP 2026-28, IIM Ahmedabad', org:'27 months at a Big 4', yrs:'Work ex route',
+   img:'https://i.pravatar.cc/400?img=33', c:'#f0a13c', dom:['WAT & GD','Work ex framing','Personal interview'],
+   tags:['WAT','GD','Work ex framing','Career gap answers']},
+  {n:'Mentor D', role:'PGP 2025-27, IIM Lucknow', org:'Commerce background', yrs:'VARC specialist',
+   img:'https://i.pravatar.cc/400?img=26', c:'#e0614f', dom:['VARC'],
+   tags:['RC pace','Parajumbles','Summary','Odd one out']},
+  {n:'Mentor E', role:'PGP 2026-28, IIM Kozhikode', org:'Engineer, 14 months work ex', yrs:'99.1 on one attempt',
+   img:'https://i.pravatar.cc/400?img=68', c:'#8b5cf6', dom:['Quant & DILR','Profile & shortlist'],
+   tags:['DILR sets','Time split','Mock review','Shortlist maths']},
+  {n:'Mentor F', role:'PGP 2025-27, IIM Indore', org:'Worked while preparing', yrs:'5 hours a day, full time job',
+   img:'https://i.pravatar.cc/400?img=5', c:'#0ea5a4', dom:['Work ex framing','Profile & shortlist'],
+   tags:['Study plan','Working professional','Weekly review','Burnout']}
+];
 
 /* ---------- helpers ---------- */
 const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
 const view=$('#view');
+const TABS=[['today','Today'],['practice','Practice'],['mock','Mocks'],['repo','Concepts'],['mentor','Mentors'],['you','You']];
+
 function loader(then){
   const l=$('#loader'); $('#loadmsg').textContent=LOADMSG[Math.floor(Math.random()*LOADMSG.length)];
-  l.classList.add('on'); setTimeout(()=>{l.classList.remove('on'); then&&then();},620);
+  l.classList.add('on'); setTimeout(()=>{l.classList.remove('on'); then&&then();},900);
 }
-function sheet(html){ $('#sheetin').innerHTML=html; $('#sheet').classList.add('on'); }
-function closeSheet(){ $('#sheet').classList.remove('on'); }
-$('#sheet').addEventListener('click',e=>{ if(e.target.id==='sheet') closeSheet(); });
+function go(t){ S.tab=t; save(); render(); window.scrollTo({top:0,behavior:'instant'}); }
 
-const TABS=[['today','Today'],['practice','Practice'],['mock','Mock'],['repo','Concepts'],['mentor','Mentors'],['you','You']];
-function drawTabs(){
-  $('#tabs').innerHTML=TABS.map(([k,l])=>`<button class="tab ${S.tab===k?'on':''}" data-t="${k}">${l}</button>`).join('');
-  $('#tabs').querySelectorAll('.tab').forEach(b=>b.onclick=()=>{S.tab=b.dataset.t;save();render()});
-}
-function chrome(){
-  $('#streak').textContent=S.streak+' day streak';
-  $('#signbtn').textContent=S.signed?'Profile':'Sign up';
+/* reveal on scroll */
+let io;
+function observe(){
+  io && io.disconnect();
+  io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:.12});
+  $$('.rv').forEach((el,i)=>{ el.style.transitionDelay=(Math.min(i,8)*55)+'ms'; io.observe(el); });
 }
 
-/* ---------- views ---------- */
-function vToday(){
-  const done=Object.keys(S.answers).length>=3;
-  return `
-  <h1>Today's case</h1>
-  <p class="sub">${CASE.date}. One case. Three questions. One from each section.</p>
-  <div class="card" style="margin-top:16px">
-    <div class="row" style="margin-bottom:10px">
-      <span class="pill">Case 148</span><div class="spacer" style="flex:1"></div>
-      <span class="sm muted">Resets at midnight</span>
+/* ---------- daily case popup ---------- */
+function openPop(){
+  $('#popdate').textContent=CASE.date;
+  $('#scrim').classList.add('on'); $('#pop').classList.add('on');
+  document.body.style.overflow='hidden';
+  if(!S.caseDone){ S.caseIdx=0; S.answers={}; }
+  drawPop();
+}
+function closePop(){
+  $('#scrim').classList.remove('on'); $('#pop').classList.remove('on');
+  document.body.style.overflow=''; render();
+}
+function drawPop(){
+  const i=S.caseIdx, n=CASE.q.length;
+  $('#progbar').style.width=((i/n)*100)+'%';
+  if(i>=n) return popResult();
+  const q=CASE.q[i];
+  const picked=S.answers[i];
+  $('#popbody').innerHTML = `
+    ${i===0?`<div class="passage">
+      <div class="chip" style="margin-bottom:14px">${CASE.title}</div>
+      ${CASE.passage.map(p=>`<p>${p}</p>`).join('')}
+    </div>`:''}
+    <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px">
+      <span class="chip">${q.sec}</span><span class="chip">${q.type}</span>
+      <span style="margin-left:auto;font-size:13px;color:var(--ink3);font-family:Fraunces,serif;font-style:italic">${i+1} of ${n}</span>
     </div>
-    <h2>${CASE.title}</h2>
-    <p class="sub" style="margin-top:6px">A policy argument, the numbers under it, and the arithmetic those numbers hide.</p>
-    <div class="grid2" style="margin:14px 0 4px">
-      ${CASE.q.map(q=>`<span class="pill ${q.sec==='VARC'?'v':q.sec==='QA'?'q':'d'}">${q.sec}</span>`).join('')}
-    </div>
-    <div style="margin-top:16px">
-      ${done?`<button class="btn sec" onclick="showResult()">See your result</button>`
-             :`<button class="btn" onclick="startCase()">${Object.keys(S.answers).length?'Continue':'Start'}</button>`}
-    </div>
-    ${S.signed?'':'<div class="note">You can answer without an account. Signing up saves your record so the weak point read can build.</div>'}
-  </div>
-
-  <h2 style="margin-top:26px">Carry on</h2>
-  <div class="card row" style="cursor:pointer" onclick="S.tab='repo';save();render()">
-    <div style="flex:1"><h3>Percentage change on a shifting base</h3>
-      <p class="sm muted">Concept repo. Read it, then five questions that climb.</p></div>
-    <span class="pill q">Open</span>
-  </div>
-  <div class="card row" style="cursor:pointer" onclick="S.tab='mock';save();render()">
-    <div style="flex:1"><h3>Weekly mock</h3>
-      <p class="sm muted">Choose your own level, or sit the national paper.</p></div>
-    <span class="pill">Due</span>
-  </div>`;
+    <p class="qstem">${q.stem}</p>
+    ${q.opts.map((o,k)=>`<button class="opt ${picked!=null?(k===q.ans?'ok':(k===picked?'no':'')):''}"
+       onclick="pick(${k})" ${picked!=null?'disabled':''}>${o}</button>`).join('')}
+    ${picked!=null?`<div class="why"><div class="k">Why that one went wrong</div><p>${q.why}</p></div>
+      <div style="margin-top:20px;text-align:right">
+        <button class="btn" onclick="nextQ()">${i===n-1?'See your score':'Next question'}</button>
+      </div>`:''}`;
 }
-
-function vPractice(){
-  return `
-  <h1>Practice</h1>
-  <p class="sub">Two ways through the same syllabus. Pick the one you will actually do.</p>
-
-  <div class="card" style="margin-top:16px">
-    <span class="pill q">Game mode</span>
-    <h2 style="margin-top:10px">Quick fire</h2>
-    <p class="sub">Thirty second questions, one at a time, scored on speed and accuracy. Streaks, leagues, the lot. Built for people who think on their feet.</p>
-    <div class="bar" style="margin:14px 0 10px"><i style="width:34%"></i></div>
-    <p class="sm muted" style="margin-bottom:12px">Arithmetic ladder, 17 of 50 cleared</p>
-    <button class="btn sm" onclick="sheet('<h2>Quick fire</h2><p class=sub style=margin-top:8px>Illustrative. The game track is specified in the plan and sits outside the MVP build.</p><button class=\\'btn sm\\' style=margin-top:16px onclick=closeSheet()>Close</button>')">Play</button>
-  </div>
-
-  <div class="card">
-    <span class="pill">Study mode</span>
-    <h2 style="margin-top:10px">Question repo</h2>
-    <p class="sub">Plain sets by concept, no timer, no points. Sit and solve until the topic is finished.</p>
-    <div style="margin-top:14px">
-      ${['Arithmetic','Algebra','Geometry','Number system','Modern maths','Parajumbles','RC','Set logic']
-        .map(t=>`<span class="pill" style="margin:0 6px 6px 0">${t}</span>`).join('')}
-    </div>
-    <button class="btn sm sec" style="margin-top:14px" onclick="S.tab='repo';save();render()">Open a topic</button>
-  </div>
-
-  <div class="note"><b>Why both.</b> Some people learn through a game. Some people find the game insulting and want to sit and solve. The syllabus underneath is identical.</div>`;
-}
-
-function vMock(){
-  return `
-  <h1>Weekly mock</h1>
-  <p class="sub">Same interface as the real exam. Choose the paper before you start.</p>
-
-  <div class="card" style="margin-top:16px">
-    <span class="pill v">Mode one</span>
-    <h2 style="margin-top:10px">Pegged to you</h2>
-    <p class="sub">Every concept in this paper is one you have already cleared. Nothing here should be unsolvable. What it measures is speed, accuracy and selection.</p>
-    <button class="btn sm" style="margin-top:14px" onclick="openMock('pegged')">Start pegged paper</button>
-  </div>
-
-  <div class="card">
-    <span class="pill d">Mode two</span>
-    <h2 style="margin-top:10px">National level</h2>
-    <p class="sub">Full CAT difficulty, the paper everyone sits. Expect questions you cannot do. That is the point.</p>
-    <button class="btn sm sec" style="margin-top:14px" onclick="openMock('national')">Start national paper</button>
-  </div>
-
-  <h2 style="margin-top:26px">After the last mock</h2>
-  <div class="card">
-    <h3 style="margin-bottom:10px">Your selection read</h3>
-    <p class="sm" style="margin-bottom:12px">Scored on which questions you chose to attempt, separate from whether you got them right.</p>
-    <div class="note" style="margin:0 0 8px"><b>You attempted 4 sets in DI/LR.</b> Two of them were in topics where your accuracy sits under 40 percent. You spent 19 minutes there and scored 2 marks.</div>
-    <div class="note" style="margin:0 0 8px"><b>You left set 3 untouched.</b> It was a seating arrangement, your strongest set type this month. 4 marks unclaimed.</div>
-    <div class="note" style="margin:0"><b>Net.</b> Attempting your two strongest sets instead would have moved you 6 marks without answering a single new question correctly.</div>
-  </div>`;
-}
-
-function vRepo(){
-  const q=REPO.quiz[S.repoStage];
-  return `
-  <h1>${REPO.title}</h1>
-  <p class="sub">Read it, then answer. The questions climb until you stop.</p>
-  <div class="card" style="margin-top:16px">
-    ${REPO.body.map(p=>`<p style="margin-bottom:11px">${p}</p>`).join('')}
-    <div class="note"><b>Video explanation.</b> Same concept, four minutes, for people who would rather watch it than read it.</div>
-  </div>
-  ${ q ? `
-  <div class="card">
-    <div class="row" style="margin-bottom:12px">
-      <span class="pill q">${q.lvl}</span>
-      <div class="spacer" style="flex:1"></div>
-      <span class="sm muted">${S.repoStage+1} of ${REPO.quiz.length} &nbsp;&middot;&nbsp; ${S.repoScore} right</span>
-    </div>
-    <h3 style="margin-bottom:14px">${q.stem}</h3>
-    ${q.opts.map((o,i)=>`<button class="opt" onclick="repoAns(${i})">${o}</button>`).join('')}
-  </div>`
-  : `<div class="card" style="text-align:center">
-      <h2>${S.repoScore} of ${REPO.quiz.length}</h2>
-      <p class="sub" style="margin:8px 0 16px">You went past CAT level on this concept.</p>
-      <button class="btn sm sec" onclick="S.repoStage=0;S.repoScore=0;save();render()">Run it again</button>
-    </div>` }`;
-}
-
-function vMentor(){
-  return `
-  <h1>Mentors</h1>
-  <p class="sub">Current students at the colleges you are aiming for. One credit is half an hour.</p>
-  <div class="card row" style="margin-top:16px">
-    <div style="flex:1"><h2>${S.credits} credits</h2><p class="sm muted">${S.credits/2} hours left this cycle</p></div>
-    <span class="pill v">Free</span>
-  </div>
-  ${MENTORS.map((m,i)=>`
-  <div class="card">
-    <div class="row">
-      <div style="flex:1">
-        <h3>${m.c}</h3>
-        <p class="sm muted">${m.y} &nbsp;&middot;&nbsp; ${m.bg}</p>
-      </div>
-      <button class="ghost" onclick="book(${i})">Book</button>
-    </div>
-    <div style="margin-top:10px"><span class="pill">${m.for}</span></div>
-  </div>`).join('')}
-  <div class="note"><b>How credits come back.</b> Earned through streaks, finished mocks and referrals. Never bought, because the constraint is mentor time rather than money.</div>`;
-}
-
-function vYou(){
-  const tags=S.tags.length?S.tags:null;
-  return `
-  <h1>You</h1>
-  <p class="sub">Built from what you answered. Nothing here was filled in by you.</p>
-
-  <div class="stats" style="margin-top:16px">
-    <div class="stat"><b>${Object.keys(S.answers).length}</b><span>Answered</span></div>
-    <div class="stat"><b>${S.streak}</b><span>Day streak</span></div>
-    <div class="stat"><b>${S.credits}</b><span>Credits</span></div>
-  </div>
-
-  <div class="card">
-    <h3 style="margin-bottom:12px">Weak points</h3>
-    ${ tags ? `
-      <div class="note" style="margin:0 0 8px"><b>QA, percentages.</b> Method was right, base was wrong. Seen once.</div>
-      <div class="note" style="margin:0 0 8px"><b>DI/LR, set logic.</b> Constraint misread. Seen once.</div>
-      <div class="note" style="margin:0"><b>VARC, summary.</b> Cleared.</div>`
-      : `<p class="sm muted">Answer today's case and this fills itself.</p>` }
-  </div>
-
-  <div class="card">
-    <h3 style="margin-bottom:8px">Where you stand</h3>
-    <p class="sm muted" style="margin-bottom:12px">Against the band directly above you, not against the toppers.</p>
-    <div class="bar"><i style="width:58%"></i></div>
-    <p class="sm muted" style="margin-top:8px">You moved up. So did the band. Net position held.</p>
-  </div>
-
-  ${S.signed?'':`<div class="card">
-    <h3>Finish your profile</h3>
-    <p class="sm muted" style="margin:6px 0 14px">Four questions. The read gets sharper with each one.</p>
-    <button class="btn sm" onclick="onboard()">Continue</button>
-  </div>`}`;
-}
-
-function vCase(){
-  const i=S.caseIdx, q=CASE.q[i], picked=S.answers[i];
-  const shown=picked!==undefined;
-  return `
-  <div class="row" style="margin:4px 0 14px">
-    <span class="pill ${q.sec==='VARC'?'v':q.sec==='QA'?'q':'d'}">${q.sec}</span>
-    <span class="sm muted">${q.type}</span>
-    <div class="spacer" style="flex:1"></div>
-    <span class="sm muted">${i+1} of 3</span>
-  </div>
-  <div class="bar" style="margin-bottom:16px"><i style="width:${(i)/3*100}%"></i></div>
-
-  <div class="passage">${CASE.passage.map(p=>`<p>${p}</p>`).join('')}</div>
-
-  <h3 style="margin-bottom:14px">${q.stem}</h3>
-  ${q.opts.map((o,k)=>{
-    let c='opt';
-    if(shown){ if(k===q.ans)c+=' right'; else if(k===picked)c+=' wrong'; }
-    return `<button class="${c}" ${shown?'':`onclick="pick(${k})"`}>${o}</button>`;
-  }).join('')}
-
-  ${shown?`
-    <div class="card" style="margin-top:14px">
-      <span class="pill ${picked===q.ans?'v':'d'}">${picked===q.ans?'Correct':'Missed'}</span>
-      <p style="margin-top:10px;font-size:15px">${q.why}</p>
-    </div>
-    <button class="btn" onclick="nextQ()">${i<2?'Next question':'See your result'}</button>
-  `:''}`;
-}
-
-/* ---------- actions ---------- */
-function startCase(){ S.caseIdx=0; save(); loader(()=>{S.tab='case';render()}); }
 function pick(k){
-  S.answers[S.caseIdx]=k;
-  if(k!==CASE.q[S.caseIdx].ans) S.tags.push(CASE.q[S.caseIdx].sec);
-  save(); render();
+  if(S.answers[S.caseIdx]!=null) return;
+  S.answers[S.caseIdx]=k; save(); drawPop();
 }
-function nextQ(){
-  if(S.caseIdx<2){ S.caseIdx++; save(); render(); }
-  else showResult();
-}
-function showResult(){
-  const right=CASE.q.filter((q,i)=>S.answers[i]===q.ans).length;
-  S.streak=Math.max(S.streak,1); save(); chrome();
-  sheet(`
-    <h1>${right} of 3</h1>
-    <p class="sub" style="margin-bottom:16px">Today's case is done. It resets at midnight.</p>
-    <div class="stats">
-      <div class="stat"><b>${right}</b><span>Correct</span></div>
-      <div class="stat"><b>4:12</b><span>Your time</span></div>
-      <div class="stat"><b>6:30</b><span>Cohort avg</span></div>
+function nextQ(){ S.caseIdx++; save(); drawPop(); }
+function popResult(){
+  const n=CASE.q.length;
+  let right=0; CASE.q.forEach((q,i)=>{ if(S.answers[i]===q.ans) right++; });
+  const pct = 40 + Math.round((right/n)*58) + Math.floor(Math.random()*3);
+  S.caseDone=true; S.casePct=pct; S.streak=(S.streak||0)+ (S.caseDone?0:1);
+  if(!S.countedToday){ S.streak=(S.streak||0)+1; S.countedToday=true; }
+  save();
+  $('#progbar').style.width='100%';
+  const tiles = CASE.q.map((q,i)=>`<div class="tile ${S.answers[i]===q.ans?'ok':'part'}" style="animation-delay:${i*120}ms">${S.answers[i]===q.ans?'&#10003;':'&#10007;'}</div>`).join('');
+  $('#popbody').innerHTML=`
+    <div style="text-align:center;padding:14px 0 6px">
+      <div class="tiles" style="margin-top:0">${tiles}</div>
+      <div class="scorebig" style="margin-top:26px">${right} of ${n}</div>
+      <span class="pcpill">${pct}th percentile today</span>
+      <p style="color:var(--ink2);margin:20px auto 0;max-width:46ch">
+        Everyone got the same case today, so that percentile is a straight comparison. Come back tomorrow for a new one.</p>
     </div>
-    <div class="note" style="margin-bottom:8px"><b>Percentages.</b> Your method was right and the base was wrong. That is a different fix from not knowing percentages.</div>
-    <div class="note" style="margin-bottom:16px"><b>Next.</b> One concept repo, five questions, about eight minutes.</div>
-    <button class="btn sm" onclick="closeSheet();S.tab='repo';save();render()">Open the repo</button>
-    <button class="btn sm sec" style="margin-top:8px" onclick="closeSheet();S.tab='you';save();render()">See your weak points</button>
-  `);
+    <div class="grid g2" style="margin-top:28px">
+      <div class="card"><h3>What the platform read</h3>
+        <p>${right===n?'Nothing to fix on this one. The platform had no error to tag.':'Your wrong answer was a selection error, which means you committed before the stem was fully held. The platform tagged it from how fast you answered and the fact that you never went back up.'}</p></div>
+      <div class="card"><h3>What it is sending you next</h3>
+        <p>${right===n?'A harder case tomorrow, one rung up from this one.':'The percentage change concept, because that is the upstream cause. The method fix unlocks after you clear it.'}</p>
+        <button class="btn sm" style="margin-top:14px" onclick="closePop();go('repo')">Open the concept</button></div>
+    </div>
+    <div style="text-align:center;margin-top:26px">
+      <button class="btn ghost" onclick="closePop()">Back to the homepage</button>
+    </div>`;
 }
-function repoAns(i){
-  const q=REPO.quiz[S.repoStage];
-  if(i===q.ans) S.repoScore++;
-  S.repoStage++; save();
-  loader(()=>render());
+
+/* ---------- homepage ---------- */
+const AVS=[[6,14,'47'],[22,6,'12'],[76,9,'33'],[90,20,'26'],[12,62,'68'],[85,66,'5']];
+function vToday(){
+  const done=S.caseDone;
+  return `
+<div class="hero2">
+  <div class="orb">
+    <svg viewBox="0 0 1200 600" preserveAspectRatio="none">
+      <path d="M-50 420 Q 600 -140 1250 420" fill="none" stroke="#fff" stroke-width="1"/>
+      <path d="M-50 520 Q 600 -40 1250 520" fill="none" stroke="#fff" stroke-width="1"/>
+    </svg>
+    ${AVS.map((a,i)=>`<div class="av" style="left:${a[0]}%;top:${a[1]}%;animation-delay:${i*.7}s">
+      <img src="https://i.pravatar.cc/120?img=${a[2]}" alt=""></div>`).join('')}
+  </div>
+  <div class="wrap">
+    <span class="eyebrow">Free. No account to start.</span>
+    <h1 class="mix">Still studying for CAT <i>like a twelfth grader?</i></h1>
+    <p class="sub">You already know which section hurt you. Nobody has ever told you why.
+      Meridian reads how you answer and names the actual cause, then fixes one thing at a time.</p>
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:34px;flex-wrap:wrap">
+      <button class="pill solid" onclick="openPop()">${done?'Replay today’s case':'Play today’s case'} &#8599;</button>
+      <button class="pill" onclick="document.getElementById('how').scrollIntoView()">See how it works</button>
+    </div>
+    <p style="text-align:center;margin-top:16px;font-size:13px;color:#7a7a75">Five questions. One case. Ten minutes. Everyone gets the same one.</p>
+  </div>
+</div>
+
+<section style="padding:56px 0 24px">
+  <div class="wrap">
+    <div class="casebar rv">
+      <div class="k">${CASE.date} &middot; Case of the day</div>
+      <h3>${CASE.title}</h3>
+      <div class="tiles">${CASE.q.map((q,i)=>`<div class="tile ${done?(S.answers[i]===q.ans?'ok':'part'):''}" style="animation-delay:${i*110}ms">${q.sec[0]}</div>`).join('')}
+        <div class="tile" style="animation-delay:330ms">?</div><div class="tile" style="animation-delay:440ms">?</div></div>
+      <div class="metarow">
+        <div><b>${S.streak||0}</b><span>Day streak</span></div>
+        <div><b>${done?(S.casePct+'th'):'—'}</b><span>Your percentile</span></div>
+        <div><b>${S.credits}</b><span>Mentor credits</span></div>
+      </div>
+      <div style="margin-top:26px"><button class="pill dk" onclick="openPop()">${done?'Open it again':'Start the case'} &#8599;</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="dark band" id="how" style="margin:40px 0;border-radius:28px">
+  <div class="wm">why</div>
+  <div class="wrap">
+    <div class="shead">
+      <div class="k">The gap nobody fills</div>
+      <h2 style="font-family:Nunito;font-style:normal;font-weight:800;letter-spacing:-.03em">
+        Every platform tells you <i class="serif" style="font-weight:400">what</i> happened.</h2>
+      <p>None of them tell you why. So you re-read the topic you already read, and the same question beats you again next month.</p>
+    </div>
+    <div class="vs">
+      <div class="col rv"><div class="k">What you do now</div>
+        <li>Write RC in a notebook and stop there</li>
+        <li>Re-read whichever section scored worst</li>
+        <li>Pick a DILR set in twenty seconds and never check the call</li>
+        <li>Judge progress on more questions starting to make sense</li>
+      </div>
+      <div class="col good rv"><div class="k">What Meridian does</div>
+        <li>Names the failure mode under the topic, not the topic</li>
+        <li>Routes the upstream cause first and hides the rest</li>
+        <li>Scores the decision to attempt, from what you actually did</li>
+        <li>Shows the repeat count, so progress is a number</li>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wm">how</div>
+  <div class="wrap">
+    <div class="shead">
+      <div class="k">The diagnosis layer</div>
+      <h2>Four causes, read from behaviour</h2>
+      <svg class="sq" viewBox="0 0 120 14"><path d="M2 9 Q 18 1 34 8 T 66 8 T 98 7 T 118 4" fill="none" stroke="url(#g1)" stroke-width="2.5" stroke-linecap="round"/>
+        <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#3cb46e"/><stop offset=".5" stop-color="#f0a13c"/><stop offset="1" stop-color="#e0614f"/></linearGradient></defs></svg>
+      <p style="margin-top:18px">In a multiple choice test the only thing you hand us is an answer, so we never ask you to explain. We read how you got there.</p>
+    </div>
+    <div class="grid g4">
+      <div class="cause rv"><div class="n">01</div><h3>Selection error</h3>
+        <p>You committed before the stem was fully held.</p>
+        <div class="sig">Signal <b>fast answer, no scroll back, no change</b></div></div>
+      <div class="cause rv"><div class="n">02</div><h3>Method error</h3>
+        <p>You knew it and took the long road to get there.</p>
+        <div class="sig">Signal <b>slow, revisits, time above cohort median</b></div></div>
+      <div class="cause rv"><div class="n">03</div><h3>Concept gap</h3>
+        <p>The concept was never actually closed in the first place.</p>
+        <div class="sig">Signal <b>same concept failed before</b></div></div>
+      <div class="cause rv"><div class="n">04</div><h3>Calculation slip</h3>
+        <p>The approach was right and the arithmetic was not.</p>
+        <div class="sig">Signal <b>near miss after a clean run</b></div></div>
+    </div>
+    <p style="text-align:center;margin-top:26px;color:var(--ink3);font-size:14px">
+      Most wrong answers carry two of these at once, so we tag a primary and a secondary and fix the upstream one first. You never see two fixes at the same time.</p>
+  </div>
+</section>
+
+<section class="dark band" style="border-radius:28px;margin-bottom:40px">
+  <div class="wm">who</div>
+  <div class="wrap">
+    <div class="shead"><div class="k">Mentors</div>
+      <h2>Thirty minutes with someone already inside</h2>
+      <p>Not a counsellor on a sales call. A current student at the college you are actually targeting.</p></div>
+    <div style="display:flex;justify-content:center"><button class="pill" onclick="go('mentor')">Browse mentors &#8599;</button></div>
+  </div>
+</section>
+
+<section style="padding:30px 0 90px">
+  <div class="wrap">
+    <p class="quote rv">&ldquo;More questions are starting to make sense.&rdquo;<br>
+      <span style="color:var(--ink3)">That is a feeling. We give you a number.</span></p>
+    <div style="display:flex;justify-content:center;margin-top:32px">
+      <button class="pill dk" onclick="openPop()">Play today&rsquo;s case &#8599;</button></div>
+  </div>
+</section>`;
 }
+
+/* ---------- mentors, mentorunion layout ---------- */
+let MDOM='All mentors';
+function vMentor(){
+  const list = MDOM==='All mentors' ? MENTORS : MENTORS.filter(m=>m.dom.includes(MDOM));
+  return `<div class="view"><div class="wrap">
+    <div style="display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:8px">
+      <div>
+        <h1 class="ph1">Our mentors</h1>
+        <svg class="sq" style="margin-left:0" viewBox="0 0 120 14"><path d="M2 9 Q 18 1 34 8 T 66 8 T 98 7 T 118 4" fill="none" stroke="url(#g2)" stroke-width="2.5" stroke-linecap="round"/>
+          <defs><linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#3cb46e"/><stop offset=".5" stop-color="#f0a13c"/><stop offset="1" stop-color="#e0614f"/></linearGradient></defs></svg>
+      </div>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+        <span class="chip">${S.credits} credits left</span>
+        <span style="font-size:13px;color:var(--ink3)">1 credit = 30 minutes</span>
+      </div>
+    </div>
+    <p class="psub">Two credits open on signup and the rest unlock as you use the platform, because there are more of you than there are of them.</p>
+    <div class="mentorbar">
+      <div class="rail">${DOMAINS.map(d=>`<button class="${d===MDOM?'on':''}" onclick="setDom('${d}')">${d}</button>`).join('')}</div>
+      <div class="grid g3">
+        ${list.map((m,i)=>`<div class="mcard rv">
+          <div class="ph" style="background:${m.c}">
+            <div class="ini">${m.n.split(' ')[1]||m.n[0]}</div>
+            <img src="${m.img}" alt="" onerror="this.remove()">
+          </div>
+          <div class="bd">
+            <h4>${m.n}</h4>
+            <div class="role">${m.role}</div>
+            <div class="role" style="color:var(--ink3)">${m.org}</div>
+            <div class="yrs">${m.yrs}</div>
+            <div class="tags">${m.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+            <button class="btn sm" style="margin-top:14px;width:100%;justify-content:center"
+              onclick="book(${MENTORS.indexOf(m)})">Book 30 minutes</button>
+          </div></div>`).join('')}
+      </div>
+    </div>
+    ${list.length===0?'<p style="margin-top:24px;color:var(--ink3)">Nobody in that domain yet. Campus activation runs through week one.</p>':''}
+  </div></div>`;
+}
+function setDom(d){ MDOM=d; render(); }
 function book(i){
   const m=MENTORS[i];
-  if(S.credits<1){ sheet('<h2>No credits left</h2><p class=sub style=margin-top:8px>Finish a mock or keep a streak to earn them back.</p>'); return; }
-  sheet(`<h2>${m.c}</h2><p class="sub" style="margin:6px 0 14px">${m.bg}</p>
-    <div class="note" style="margin-bottom:14px"><b>1 credit.</b> Thirty minutes. ${m.for}.</div>
-    <button class="btn sm" onclick="S.credits--;save();closeSheet();render()">Confirm booking</button>
-    <button class="btn sm sec" style="margin-top:8px" onclick="closeSheet()">Not now</button>`);
+  if(S.credits<1){ alert('No credits left. Finish today’s case to earn one.'); return; }
+  S.credits-=1; save();
+  alert('Request sent to '+m.n+'. They hold their own Calendly, so the confirmation comes from them.');
+  render();
+}
+
+/* ---------- concepts ---------- */
+function vRepo(){
+  const i=S.repoStage, q=REPO.quiz[i];
+  return `<div class="view"><div class="wrap" style="max-width:780px">
+    <span class="chip">Routed here by your last error</span>
+    <h1 class="ph1" style="margin-top:14px">${REPO.title}</h1>
+    <p class="psub">Read it once, then prove it. The ladder stops when you stop.</p>
+    <div class="card" style="padding:26px">${REPO.body.map(p=>`<p style="margin-bottom:13px;color:var(--ink2);font-size:15.5px">${p}</p>`).join('')}</div>
+    <div style="margin-top:26px">
+      ${i<REPO.quiz.length?`
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <span class="chip">${q.lvl}</span>
+          <span style="margin-left:auto;font-size:13px;color:var(--ink3)">${i+1} of ${REPO.quiz.length}</span>
+        </div>
+        <p class="qstem">${q.stem}</p>
+        ${q.opts.map((o,k)=>`<button class="opt" onclick="repoAns(${k})">${o}</button>`).join('')}`
+      : `<div class="card" style="text-align:center;padding:34px">
+          <div class="scorebig">${S.repoScore} / ${REPO.quiz.length}</div>
+          <p style="margin-top:14px;color:var(--ink2)">Concept cleared. Method refinement is open now.</p>
+          <button class="btn" style="margin-top:18px" onclick="S.repoStage=0;S.repoScore=0;save();render()">Run it again</button>
+        </div>`}
+    </div>
+  </div></div>`;
+}
+function repoAns(k){
+  const q=REPO.quiz[S.repoStage];
+  if(k===q.ans) S.repoScore++;
+  S.repoStage++; save(); render();
+}
+
+/* ---------- practice ---------- */
+function vPractice(){
+  const rows=[
+    ['Percentage change on a shifting base','QA','Concept gap','3 times','repo'],
+    ['Paragraph summary, argument vs true statement','VARC','Selection error','2 times','repo'],
+    ['Set selection under a ceiling constraint','DI/LR','Method error','2 times','repo'],
+    ['Logarithms, base change','QA','Concept gap','4 times','repo']
+  ];
+  return `<div class="view"><div class="wrap">
+    <h1 class="ph1">Your weak point read</h1>
+    <p class="psub">Built from what you did. There is nothing here for you to fill in.</p>
+    <div class="grid g2">
+      ${rows.map(r=>`<div class="card rv">
+        <div style="display:flex;gap:8px;margin-bottom:10px"><span class="chip">${r[1]}</span>
+          <span class="chip" style="background:#fdeeec;color:#a33">${r[2]}</span></div>
+        <h3>${r[0]}</h3>
+        <p style="margin-top:6px">Missed <b>${r[3]}</b> in the last three weeks. Same cause each time.</p>
+        <button class="btn sm" style="margin-top:14px" onclick="go('repo')">Fix this one</button>
+      </div>`).join('')}
+    </div>
+    <div class="card" style="margin-top:20px;background:#fdf3e4;border-color:#f6e0bd">
+      <h3>Why only one fix shows at a time</h3>
+      <p>Three of these carry a second cause underneath. The platform holds those back until the upstream one is cleared, because fixing a method on a concept you do not have yet just makes you faster at being wrong.</p>
+    </div>
+  </div></div>`;
+}
+
+/* ---------- you ---------- */
+function vYou(){
+  return `<div class="view"><div class="wrap" style="max-width:820px">
+    <h1 class="ph1">You</h1>
+    <p class="psub">Built across sessions. Nothing here was a form you had to finish.</p>
+    <div class="grid g2">
+      <div class="card rv"><h3>Profile read</h3>
+        <p>${S.profile?('Work experience '+S.profile+'. Matched against the profile of candidates who actually convert, by institute.'):'Tell us one thing and this starts working. It never blocks anything.'}</p>
+        <button class="btn sm" style="margin-top:14px" onclick="onboard()">${S.profile?'Update it':'Add work experience'}</button></div>
+      <div class="card rv"><h3>Subject scores</h3>
+        <p>VARC 68 &middot; DILR 54 &middot; QA 61. Percentile sits in the weekly mock and the daily case, never here, because a percentile on every screen in week two of a preparation helps nobody.</p></div>
+      <div class="card rv"><h3>Streak</h3><p>${S.streak||0} days. The streak is a nudge. The mentor call is the commitment.</p></div>
+      <div class="card rv"><h3>Credits</h3><p>${S.credits} of 10. Two came free and the rest unlock as you use the platform.</p></div>
+    </div>
+  </div></div>`;
 }
 function onboard(){
-  sheet(`
-    <span class="pill">Step 1 of 4</span>
-    <h2 style="margin:10px 0 4px">How much work experience?</h2>
-    <p class="sub" style="margin-bottom:16px">Pegs, because the scoring curves use pegs.</p>
-    ${['None','1 month','3 months','6 months','12 months','24 months','More than 2 years']
-      .map(o=>`<button class="opt" onclick="S.signed=true;S.profile='${o}';save();closeSheet();chrome();render()">${o}</button>`).join('')}
-    <p class="sm muted" style="margin-top:10px">You can close this. The daily case works either way.</p>`);
+  const v=prompt('Work experience. Pick one: 0, 1, 3, 6, 12, 24 months, or years.');
+  if(v){ S.profile=v+' months'; S.signed=true; save(); render(); }
 }
-$('#signbtn').onclick=onboard;
+
+/* ---------- mocks ---------- */
+function vMock(){
+  return `<div class="view"><div class="wrap" style="max-width:860px">
+    <h1 class="ph1">Weekly mock</h1>
+    <p class="psub">Same interface as the real exam. Pick the paper before you start.</p>
+    <div class="grid g2">
+      <div class="card rv" style="padding:26px"><span class="chip" style="background:#e8f6ee;color:#2a8f54">Mode one</span>
+        <h3 style="margin-top:12px;font-size:21px">Pegged to you</h3>
+        <p>Every concept in this paper is one you have already cleared, so nothing here should be unsolvable. It measures speed, accuracy and selection rather than knowledge.</p>
+        <button class="btn" style="margin-top:18px;width:100%;justify-content:center" onclick="openMock('pegged')">Start pegged paper</button></div>
+      <div class="card rv" style="padding:26px"><span class="chip" style="background:#fdeeec;color:#a33">Mode two</span>
+        <h3 style="margin-top:12px;font-size:21px">National level</h3>
+        <p>Full CAT difficulty. There will be questions you cannot do, and that is the point of sitting it.</p>
+        <button class="btn ghost" style="margin-top:18px;width:100%;justify-content:center" onclick="openMock('national')">Start national paper</button></div>
+    </div>
+    <div class="card" style="margin-top:22px">
+      <h3>After the last mock, your selection read</h3>
+      <p style="margin-top:10px">Scored from what you did, never from what you told us.</p>
+      <ul style="list-style:none;margin-top:14px">
+        <li style="padding:11px 0;border-top:1px solid var(--line);font-size:14.5px;color:var(--ink2)">
+          <b style="color:var(--ink)">You opened 4 sets in DILR and entered 2.</b> Both were in topics where your accuracy sits under 40 percent. You spent 13 minutes there and scored 2 marks.</li>
+        <li style="padding:11px 0;border-top:1px solid var(--line);font-size:14.5px;color:var(--ink2)">
+          <b style="color:var(--ink)">You opened set 3 for 9 seconds and left it.</b> That is a seating arrangement, your strongest set type this month, and it was worth 4 marks.</li>
+        <li style="padding:11px 0;border-top:1px solid var(--line);font-size:14.5px;color:var(--ink2)">
+          <b style="color:var(--ink)">Net.</b> Swapping your two picks for the one you abandoned moves you 6 marks on the same clock, answering one fewer question.</li>
+      </ul>
+    </div>
+  </div></div>`;
+}
 
 /* ---------- mock engine ---------- */
-const MOCKQ=Array.from({length:12},(_,i)=>({
-  stem: i===0 ? 'The hardest substance available on earth is'
-       : `Question ${i+1}. Illustrative item in the mock environment.`,
-  opts: i===0 ? ['Gold','Iron','Diamond','Platinum'] : ['Option A','Option B','Option C','Option D']
-}));
-let MK={i:0,ans:{},mark:{},vis:{},t:2400,timer:null};
+let mockTimer=null;
 function openMock(mode){
-  MK={i:0,ans:{},mark:{},vis:{0:1},t:mode==='pegged'?2400:2400,timer:null};
-  $('#mkmode').textContent = mode==='pegged' ? 'Pegged to your level' : 'National level';
+  S.mock={mode,i:0,ans:{},mark:{},t:2400}; save();
+  $('#mocksec').textContent = mode==='pegged'?'Section: Quantitative Aptitude, pegged':'Section: Quantitative Aptitude, national level';
   $('#mock').classList.add('on');
-  drawMock();
-  MK.timer=setInterval(()=>{
-    MK.t--; const m=String(Math.floor(MK.t/60)).padStart(2,'0'), s=String(MK.t%60).padStart(2,'0');
-    $('#mktime').textContent=m+':'+s; if(MK.t<=0) endMock();
+  drawMock(); drawPal();
+  clearInterval(mockTimer);
+  mockTimer=setInterval(()=>{
+    S.mock.t--; const m=String(Math.floor(S.mock.t/60)).padStart(2,'0'), s=String(S.mock.t%60).padStart(2,'0');
+    $('#mocktime').textContent=m+':'+s;
+    if(S.mock.t<=0) endMock();
   },1000);
 }
 function drawMock(){
-  const q=MOCKQ[MK.i]; MK.vis[MK.i]=1;
-  $('#mkq').innerHTML=`
-    <div class="meta">Question Type : MCQ</div>
-    <div class="marks">Marks for correct answer <b style="color:#22a04a">3</b> &nbsp; Negative Marks <b style="color:#c0392b">1</b></div>
-    <p style="font-weight:700;margin-bottom:12px">Question No. ${MK.i+1}</p>
-    <p style="margin-bottom:14px">${q.stem}</p>
-    ${q.opts.map((o,k)=>`<label><input type="radio" name="o" ${MK.ans[MK.i]===k?'checked':''} onchange="MK.ans[${MK.i}]=${k};drawPal()"> ${o}</label>`).join('')}`;
-  drawPal();
+  const i=S.mock.i;
+  $('#mockq').innerHTML=`
+    <div style="font-size:13px;color:#555;margin-bottom:12px">Question ${i+1}</div>
+    <p style="font-size:16px;line-height:1.6;margin-bottom:18px">
+      ${S.mock.mode==='pegged'
+        ? 'A shopkeeper marks up by 40 percent and then offers a discount of 25 percent. The net profit percentage is:'
+        : 'If f(x) = x&sup2; - 6x + k has both roots positive and distinct, the number of integer values k can take is:'}
+    </p>
+    ${['5 percent','10 percent','15 percent','No profit'].map((o,k)=>`
+      <label style="display:block;padding:9px 0;font-size:15px">
+        <input type="radio" name="mq" ${S.mock.ans[i]===k?'checked':''} onchange="S.mock.ans[${i}]=${k};drawPal()"> ${o}</label>`).join('')}`;
 }
 function drawPal(){
-  let a=0,n=0,nv=0,mk=0;
-  $('#mkpal').innerHTML=MOCKQ.map((_,i)=>{
-    let c=''; if(MK.mark[i]){c='';mk++;} if(MK.ans[i]!==undefined){c='ans';a++;}
-    else if(MK.vis[i]){c='notans';n++;} else {nv++;}
-    return `<button class="${c} ${i===MK.i?'cur':''}" onclick="MK.i=${i};drawMock()">${i+1}</button>`;
-  }).join('');
-  $('#c-ans').textContent=a; $('#c-not').textContent=n; $('#c-nv').textContent=nv; $('#c-mark').textContent=mk;
+  const p=$('#pal'); let h='';
+  for(let k=0;k<12;k++){
+    const cls = S.mock.mark[k]?'mark':(S.mock.ans[k]!=null?'ans':'');
+    h+=`<b class="${cls} ${k===S.mock.i?'cur':''}" onclick="S.mock.i=${k};drawMock();drawPal()">${k+1}</b>`;
+  }
+  p.innerHTML=h;
+  const a=Object.keys(S.mock.ans).length, mk=Object.keys(S.mock.mark).length;
+  $('#cAns').textContent=a; $('#cNo').textContent=12-a-mk; $('#cMk').textContent=mk;
 }
-$('#mksave').onclick=()=>{ if(MK.i<MOCKQ.length-1){MK.i++;drawMock();} };
-$('#mkmark').onclick=()=>{ MK.mark[MK.i]=1; if(MK.i<MOCKQ.length-1){MK.i++;} drawMock(); };
-$('#mkclear').onclick=()=>{ delete MK.ans[MK.i]; drawMock(); };
-$('#mkend').onclick=()=>endMock();
+function clearResp(){ delete S.mock.ans[S.mock.i]; drawMock(); drawPal(); }
+function markRev(){ S.mock.mark[S.mock.i]=1; S.mock.i=Math.min(11,S.mock.i+1); drawMock(); drawPal(); }
+function saveNext(){ S.mock.i=Math.min(11,S.mock.i+1); drawMock(); drawPal(); }
 function endMock(){
-  clearInterval(MK.timer); $('#mock').classList.remove('on');
-  const att=Object.keys(MK.ans).length;
-  sheet(`<h1>Mock submitted</h1>
-    <p class="sub" style="margin-bottom:16px">Attempted ${att} of ${MOCKQ.length}.</p>
-    <div class="note" style="margin-bottom:8px"><b>Selection read.</b> Scored on what you chose to attempt, separate from what you got right.</div>
-    <div class="note" style="margin-bottom:16px"><b>Next.</b> Your weak point list updates from this paper.</div>
-    <button class="btn sm" onclick="closeSheet();S.tab='you';save();render()">See it</button>`);
+  clearInterval(mockTimer); $('#mock').classList.remove('on'); S.mock=null; save();
+  loader(()=>{ S.tab='mock'; render(); });
 }
 
-/* ---------- render ---------- */
+/* ---------- chrome and boot ---------- */
+function drawNav(){
+  $('#navlinks').innerHTML = TABS.map(([k,l])=>`<button class="${S.tab===k?'on':''}" onclick="go('${k}')">${l}</button>`).join('');
+  $('#streakn').textContent = S.streak||0;
+  $('#signbtn').textContent = S.signed?'You':'Sign up';
+  $('#signbtn').onclick = S.signed?()=>go('you'):onboard;
+}
 function render(){
-  chrome(); drawTabs();
-  const v={today:vToday,practice:vPractice,mock:vMock,repo:vRepo,mentor:vMentor,you:vYou,case:vCase}[S.tab];
-  view.innerHTML=v?v():vToday();
-  if(S.tab==='case') $('#tabs').style.display='none'; else $('#tabs').style.display='flex';
-  window.scrollTo(0,0);
+  drawNav();
+  const v={today:vToday,practice:vPractice,mock:vMock,repo:vRepo,mentor:vMentor,you:vYou}[S.tab]||vToday;
+  view.innerHTML=v();
+  observe();
 }
 render();
 </script>
