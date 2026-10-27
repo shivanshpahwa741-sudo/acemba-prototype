@@ -12,7 +12,8 @@
 :root{
   --ink:#141414; --ink2:#5b5b57; --ink3:#8d8d86;
   --paper:#fbfaf7; --card:#ffffff; --line:#e8e5de;
-  --green:#3cb46e; --green-d:#2a8f54; --amber:#f0a13c; --rose:#e0614f; --blue:#3f7ce0;
+  --blue:#1e4b98; --blue-d:#153a78; --sky:#2f6fbf; --sky2:#6f9ede;
+  --amber:#d98a1f; --rose:#c6503f;
   --r:16px; --maxw:1120px;
   --ease:cubic-bezier(.16,1,.3,1);
 }
@@ -30,12 +31,12 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
 /* buttons, duolingo physics */
 .btn{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:15px;letter-spacing:.01em;
-  padding:14px 24px;border-radius:14px;background:var(--green);color:#fff;
-  box-shadow:0 4px 0 var(--green-d);transition:transform .08s,box-shadow .08s}
-.btn:active{transform:translateY(4px);box-shadow:0 0 0 var(--green-d)}
+  padding:14px 24px;border-radius:14px;background:var(--blue);color:#fff;
+  box-shadow:0 4px 0 var(--blue-d);transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translateY(4px);box-shadow:0 0 0 var(--blue-d)}
 .btn.ghost{background:var(--card);color:var(--ink);box-shadow:0 4px 0 var(--line);border:2px solid var(--line)}
 .btn.ghost:active{transform:translateY(4px);box-shadow:0 0 0 var(--line)}
-.btn.sm{padding:10px 16px;font-size:14px;border-radius:12px;box-shadow:0 3px 0 var(--green-d)}
+.btn.sm{padding:10px 16px;font-size:14px;border-radius:12px;box-shadow:0 3px 0 var(--blue-d)}
 .btn.sm:active{transform:translateY(3px)}
 
 /* nav */
@@ -48,16 +49,16 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .navlinks button:hover{background:#f0ede6;color:var(--ink)}
 .navlinks button.on{background:var(--ink);color:#fff}
 .navr{margin-left:auto;display:flex;align-items:center;gap:12px}
-.streak{display:flex;align-items:center;gap:6px;font-weight:800;font-size:14px;color:var(--amber);
-  background:#fdf3e4;border:1px solid #f6e0bd;padding:7px 13px;border-radius:999px}
+.streak{display:flex;align-items:center;gap:6px;font-weight:800;font-size:14px;color:var(--blue);
+  background:var(--sky-bg);border:1px solid #d4e1f3;padding:7px 13px;border-radius:999px}
 
 /* hero */
 .hero{position:relative;padding:76px 0 64px;overflow:hidden}
 .hero .eyebrow{display:inline-flex;align-items:center;gap:8px;font-weight:800;font-size:12.5px;letter-spacing:.09em;
-  text-transform:uppercase;color:var(--green-d);background:#e8f6ee;border:1px solid #c9e9d6;padding:7px 14px;border-radius:999px}
+  text-transform:uppercase;color:var(--blue-d);background:#e9f0fa;border:1px solid #c5d8f0;padding:7px 14px;border-radius:999px}
 .hero h1{font-family:Fraunces,serif;font-style:italic;font-weight:400;font-size:clamp(36px,6.2vw,70px);
   line-height:1.03;letter-spacing:-.025em;margin:26px auto 0;max-width:15ch;text-align:center}
-.hero h1 em{font-style:normal;font-weight:600;background:linear-gradient(transparent 62%,#ffe08a 62%)}
+.hero h1 em{font-style:normal;font-weight:600;background:linear-gradient(transparent 62%,#c5d8f0 62%)}
 .hero .sub{margin:24px auto 0;max-width:56ch;text-align:center;font-size:18px;color:var(--ink2)}
 .hero .cta{display:flex;gap:12px;justify-content:center;margin-top:34px;flex-wrap:wrap}
 .hero .note{text-align:center;margin-top:16px;font-size:13.5px;color:var(--ink3)}
@@ -71,7 +72,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .tile{width:46px;height:46px;border-radius:11px;border:2px solid var(--line);background:var(--card);
   display:grid;place-items:center;font-weight:900;font-size:17px;color:var(--ink3);
   animation:flip .5s var(--ease) both}
-.tile.ok{background:var(--green);border-color:var(--green);color:#fff}
+.tile.ok{background:var(--blue);border-color:var(--blue);color:#fff}
 .tile.part{background:var(--amber);border-color:var(--amber);color:#fff}
 @keyframes flip{from{transform:rotateX(-90deg);opacity:0}to{transform:none;opacity:1}}
 
@@ -106,11 +107,11 @@ section{padding:72px 0}
 .vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:880px;margin:0 auto}
 @media(max-width:700px){.vs{grid-template-columns:1fr}}
 .vs .col{background:#1f1f1e;border:1px solid #2e2e2c;border-radius:var(--r);padding:20px}
-.vs .col.good{background:#16301f;border-color:#235c38}
+.vs .col.good{background:#13203c;border-color:#27406e}
 .vs .col .k{font-size:11.5px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:#8d8d86;margin-bottom:14px}
-.vs .col.good .k{color:#6fd79b}
+.vs .col.good .k{color:#8fb6ea}
 .vs li{list-style:none;padding:11px 0;border-top:1px solid #2e2e2c;font-size:14.5px;color:#d6d6d2}
-.vs .col.good li{border-color:#235c38}
+.vs .col.good li{border-color:#27406e}
 .vs li:first-of-type{border-top:0}
 
 /* mentors, mentorunion layout */
@@ -120,7 +121,7 @@ section{padding:72px 0}
 .rail button{display:block;width:100%;text-align:left;padding:12px 14px;border-radius:11px;font-weight:700;
   font-size:14.5px;color:var(--ink2);border-bottom:1px solid var(--line);transition:color .15s,background .15s}
 .rail button:last-child{border-bottom:0}
-.rail button.on{color:var(--green-d);background:#e8f6ee}
+.rail button.on{color:var(--blue-d);background:#e9f0fa}
 .mcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
   transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
 .mcard:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(20,20,20,.08)}
@@ -152,7 +153,7 @@ section{padding:72px 0}
   font-size:19px;color:var(--ink2);background:#f0ede6}
 .pop .pb{padding:26px}
 .prog{height:9px;background:#ece9e2;border-radius:999px;overflow:hidden;margin:0 26px 20px}
-.prog i{display:block;height:100%;background:var(--green);border-radius:999px;transition:width .5s var(--ease)}
+.prog i{display:block;height:100%;background:var(--blue);border-radius:999px;transition:width .5s var(--ease)}
 
 .passage{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;margin-bottom:22px}
 .passage p{margin-bottom:13px;font-size:15.5px;color:var(--ink2)}
@@ -163,11 +164,11 @@ section{padding:72px 0}
   transition:border-color .15s,background .15s,transform .1s}
 .opt:hover{border-color:#cfcabd}
 .opt:active{transform:scale(.995)}
-.opt.ok{border-color:var(--green);background:#e8f6ee}
+.opt.ok{border-color:var(--blue);background:#e9f0fa}
 .opt.no{border-color:var(--rose);background:#fdeeec}
-.why{margin-top:16px;background:#fdf3e4;border:1px solid #f6e0bd;border-radius:14px;padding:17px}
-.why .k{font-size:11.5px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#a9731f;margin-bottom:7px}
-.why p{font-size:14.5px;color:#6b4d16}
+.why{margin-top:16px;background:var(--sky-bg);border:1px solid #d4e1f3;border-radius:14px;padding:17px}
+.why .k{font-size:11.5px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:7px}
+.why p{font-size:14.5px;color:#2c3c58}
 
 /* result */
 .scorebig{font-family:Fraunces,serif;font-style:italic;font-size:64px;line-height:1;text-align:center}
@@ -197,7 +198,7 @@ section{padding:72px 0}
 .loader{position:fixed;inset:0;z-index:99;background:var(--paper);display:none;
   flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:40px}
 .loader.on{display:flex}
-.spin{width:38px;height:38px;border:4px solid var(--line);border-top-color:var(--green);border-radius:50%;animation:sp .8s linear infinite}
+.spin{width:38px;height:38px;border:4px solid var(--line);border-top-color:var(--blue);border-radius:50%;animation:sp .8s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 .loader p{max-width:42ch;text-align:center;color:var(--ink2);font-size:15.5px}
 
@@ -219,16 +220,16 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--ink3);font-si
 .hero2 .mix{font-family:Nunito,sans-serif;font-weight:800;font-size:clamp(34px,6vw,66px);line-height:1.06;
   letter-spacing:-.03em;text-align:center;max-width:16ch;margin:26px auto 0}
 .hero2 .mix i{font-family:Fraunces,serif;font-style:italic;font-weight:400;letter-spacing:-.015em;
-  background:linear-gradient(92deg,#6fd79b,#ffd166 45%,#f0a13c);-webkit-background-clip:text;background-clip:text;color:transparent}
+  background:linear-gradient(94deg,#8fb6ea,#ffffff 52%,#6f9ede);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero2 .sub{margin:22px auto 0;max-width:52ch;text-align:center;color:#a8a8a2;font-size:17px}
 .hero2 .eyebrow{display:block;width:fit-content;margin:0 auto;font-weight:800;font-size:12px;letter-spacing:.11em;
-  text-transform:uppercase;color:#6fd79b;border:1px solid #2d4a39;background:#16301f;padding:7px 15px;border-radius:999px}
+  text-transform:uppercase;color:#8fb6ea;border:1px solid #27406e;background:#13203c;padding:7px 15px;border-radius:999px}
 .pill{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:14.5px;padding:13px 24px;
   border-radius:999px;border:1.5px solid rgba(255,255,255,.35);color:#fff;transition:background .2s,border-color .2s,transform .1s}
 .pill:hover{background:rgba(255,255,255,.1);border-color:#fff}
 .pill:active{transform:scale(.97)}
-.pill.solid{background:var(--green);border-color:var(--green);box-shadow:0 4px 0 var(--green-d)}
-.pill.solid:active{transform:translateY(4px);box-shadow:0 0 0 var(--green-d)}
+.pill.solid{background:var(--blue);border-color:var(--blue);box-shadow:0 4px 0 var(--blue-d)}
+.pill.solid:active{transform:translateY(4px);box-shadow:0 0 0 var(--blue-d)}
 .pill.dk{border-color:rgba(20,20,20,.25);color:var(--ink)}
 .pill.dk:hover{background:rgba(20,20,20,.06);border-color:var(--ink)}
 
@@ -264,6 +265,40 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--ink3);font-si
 .cause .sig{margin-top:14px;padding-top:13px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink3)}
 .cause .sig b{color:var(--ink2)}
 
+
+/* ---- v2 layout ---- */
+:root{--sky-bg:#f1f5fb}
+.herocta{display:flex;gap:12px;justify-content:center;margin-top:34px;flex-wrap:wrap}
+.herostats{display:flex;gap:0;justify-content:center;margin-top:52px;border-top:1px solid #2a2a28;padding-top:26px;max-width:620px;margin-left:auto;margin-right:auto}
+.herostats div{flex:1;text-align:center;border-right:1px solid #2a2a28}
+.herostats div:last-child{border-right:0}
+.herostats b{display:block;font-family:Fraunces,serif;font-style:italic;font-size:30px;line-height:1;color:#fff}
+.herostats span{display:block;margin-top:7px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7a7a75}
+
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--card)}
+@media(max-width:860px){.steps{grid-template-columns:1fr}}
+.step{padding:30px 26px;border-right:1px solid var(--line)}
+.step:last-child{border-right:0}
+@media(max-width:860px){.step{border-right:0;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:0}}
+.step .sn{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--sky-bg);
+  color:var(--blue);font-weight:900;font-size:15px;margin-bottom:16px}
+.step h3{font-size:18px;font-weight:800}
+.step p{font-size:14.5px;color:var(--ink2);margin-top:8px}
+.lnk{margin-top:14px;font-weight:800;font-size:14px;color:var(--blue);display:inline-flex;gap:5px;align-items:center}
+.lnk:hover{text-decoration:underline}
+
+.fineprint{text-align:center;margin:28px auto 0;max-width:72ch;color:var(--ink3);font-size:14px}
+.dark.band{border-radius:0}
+section.band{padding:84px 0}
+.shead{margin-bottom:40px}
+
+/* case entry card */
+.casecta{display:flex;align-items:center;gap:22px;background:var(--ink);color:#fff;border-radius:20px;padding:26px 28px;flex-wrap:wrap}
+.casecta .t{font-family:Fraunces,serif;font-style:italic;font-size:24px;letter-spacing:-.02em}
+.casecta .d{font-size:13.5px;color:#a8a8a2;margin-top:5px}
+.casecta .r{margin-left:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+@media(max-width:620px){.casecta .r{margin-left:0;width:100%}}
+
 </style>
 </head>
 <body>
@@ -274,7 +309,7 @@ footer{border-top:1px solid var(--line);padding:40px 0;color:var(--ink3);font-si
   <div class="logo">meridian<b>.</b></div>
   <div class="navlinks" id="navlinks"></div>
   <div class="navr">
-    <div class="streak" id="streakpill">&#128293; <span id="streakn">0</span></div>
+    <div class="streak" id="streakpill">&#9889; <span id="streakn">0</span></div>
     <button class="btn sm" id="signbtn" onclick="onboard()">Sign up</button>
   </div>
 </div></nav>
@@ -387,7 +422,7 @@ const LOADMSG = [
 const DOMAINS = ['All mentors','Profile & shortlist','VARC','Quant & DILR','WAT & GD','Personal interview','Work ex framing'];
 const MENTORS = [
   {n:'Mentor A', role:'PGP 2026-28, IIM Bangalore', org:'Non-engineer, diversity weight', yrs:'Converted at 98.4',
-   img:'https://i.pravatar.cc/400?img=47', c:'#3cb46e', dom:['Profile & shortlist','Personal interview'],
+   img:'https://i.pravatar.cc/400?img=47', c:'#1e4b98', dom:['Profile & shortlist','Personal interview'],
    tags:['Profile read','PI mocks','Shortlist maths','Diversity framing']},
   {n:'Mentor B', role:'PGP 2025-27, IIM Calcutta', org:'Private college GEM', yrs:'Cleared on the second attempt',
    img:'https://i.pravatar.cc/400?img=12', c:'#3f7ce0', dom:['Quant & DILR'],
@@ -422,8 +457,12 @@ function go(t){ S.tab=t; save(); render(); window.scrollTo({top:0,behavior:'inst
 let io;
 function observe(){
   io && io.disconnect();
-  io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:.12});
-  $$('.rv').forEach((el,i)=>{ el.style.transitionDelay=(Math.min(i,8)*55)+'ms'; io.observe(el); });
+  io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),
+    {threshold:0, rootMargin:'0px 0px -8% 0px'});
+  const els=$$('.rv');
+  els.forEach((el,i)=>{ el.style.transitionDelay=(Math.min(i,8)*55)+'ms'; io.observe(el); });
+  clearTimeout(window._rvT);
+  window._rvT=setTimeout(()=>els.forEach(el=>el.classList.add('in')),2600);
 }
 
 /* ---------- daily case popup ---------- */
@@ -511,35 +550,48 @@ function vToday(){
   </div>
   <div class="wrap">
     <span class="eyebrow">Free. No account to start.</span>
-    <h1 class="mix">Still studying for CAT <i>like a twelfth grader?</i></h1>
+    <h1 class="mix">Still studying for CAT <i>like a fifth grader?</i></h1>
     <p class="sub">You already know which section hurt you. Nobody has ever told you why.
-      Meridian reads how you answer and names the actual cause, then fixes one thing at a time.</p>
-    <div style="display:flex;gap:12px;justify-content:center;margin-top:34px;flex-wrap:wrap">
+      Meridian reads how you answer, names the actual cause, and fixes one thing at a time.</p>
+    <div class="herocta">
       <button class="pill solid" onclick="openPop()">${done?'Replay today’s case':'Play today’s case'} &#8599;</button>
-      <button class="pill" onclick="document.getElementById('how').scrollIntoView()">See how it works</button>
+      <button class="pill" onclick="go('mock')">Take a mock</button>
     </div>
-    <p style="text-align:center;margin-top:16px;font-size:13px;color:#7a7a75">Five questions. One case. Ten minutes. Everyone gets the same one.</p>
+    <div class="herostats">
+      <div><b>${S.streak||0}</b><span>Day streak</span></div>
+      <div><b>${done?S.casePct+'th':'—'}</b><span>Today&rsquo;s percentile</span></div>
+      <div><b>${S.credits}</b><span>Mentor credits</span></div>
+    </div>
   </div>
 </div>
 
-<section style="padding:56px 0 24px">
+<section class="band">
+  <div class="wm">how</div>
   <div class="wrap">
-    <div class="casebar rv">
-      <div class="k">${CASE.date} &middot; Case of the day</div>
-      <h3>${CASE.title}</h3>
-      <div class="tiles">${CASE.q.map((q,i)=>`<div class="tile ${done?(S.answers[i]===q.ans?'ok':'part'):''}" style="animation-delay:${i*110}ms">${q.sec[0]}</div>`).join('')}
-        <div class="tile" style="animation-delay:330ms">?</div><div class="tile" style="animation-delay:440ms">?</div></div>
-      <div class="metarow">
-        <div><b>${S.streak||0}</b><span>Day streak</span></div>
-        <div><b>${done?(S.casePct+'th'):'—'}</b><span>Your percentile</span></div>
-        <div><b>${S.credits}</b><span>Mentor credits</span></div>
-      </div>
-      <div style="margin-top:26px"><button class="pill dk" onclick="openPop()">${done?'Open it again':'Start the case'} &#8599;</button></div>
+    <div class="shead">
+      <div class="k">Three steps, ten minutes a day</div>
+      <h2>One case. Five questions. One fix.</h2>
+      <svg class="sq" viewBox="0 0 120 14"><path d="M2 9 Q 18 1 34 8 T 66 8 T 98 7 T 118 4" fill="none" stroke="url(#g1)" stroke-width="2.5" stroke-linecap="round"/>
+        <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#1e4b98"/><stop offset=".55" stop-color="#2f6fbf"/><stop offset="1" stop-color="#6f9ede"/></linearGradient></defs></svg>
+    </div>
+    <div class="steps">
+      <div class="step rv"><div class="sn">1</div>
+        <h3>Answer today&rsquo;s case</h3>
+        <p>It opens over the page. Five questions off one situation, the way an IIM actually sets a paper. No login, nothing to create.</p>
+        <button class="lnk" onclick="openPop()">Open it &#8599;</button></div>
+      <div class="step rv"><div class="sn">2</div>
+        <h3>Read the cause, not the score</h3>
+        <p>We never ask you to explain. We read how you got there and name which of the four causes it was.</p>
+        <button class="lnk" onclick="document.getElementById('causes').scrollIntoView()">See the four &#8599;</button></div>
+      <div class="step rv"><div class="sn">3</div>
+        <h3>Clear the one thing underneath</h3>
+        <p>A concept page and a rising quiz, routed to whichever cause sat upstream. One fix at a time, never two.</p>
+        <button class="lnk" onclick="go('repo')">Open concepts &#8599;</button></div>
     </div>
   </div>
 </section>
 
-<section class="dark band" id="how" style="margin:40px 0;border-radius:28px">
+<section class="dark band" id="why">
   <div class="wm">why</div>
   <div class="wrap">
     <div class="shead">
@@ -565,15 +617,12 @@ function vToday(){
   </div>
 </section>
 
-<section class="band">
-  <div class="wm">how</div>
+<section class="band" id="causes">
   <div class="wrap">
     <div class="shead">
       <div class="k">The diagnosis layer</div>
       <h2>Four causes, read from behaviour</h2>
-      <svg class="sq" viewBox="0 0 120 14"><path d="M2 9 Q 18 1 34 8 T 66 8 T 98 7 T 118 4" fill="none" stroke="url(#g1)" stroke-width="2.5" stroke-linecap="round"/>
-        <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#3cb46e"/><stop offset=".5" stop-color="#f0a13c"/><stop offset="1" stop-color="#e0614f"/></linearGradient></defs></svg>
-      <p style="margin-top:18px">In a multiple choice test the only thing you hand us is an answer, so we never ask you to explain. We read how you got there.</p>
+      <p style="margin-top:16px">In a multiple choice test the only thing you hand us is an answer, so we never ask you to explain. We read how you got there.</p>
     </div>
     <div class="grid g4">
       <div class="cause rv"><div class="n">01</div><h3>Selection error</h3>
@@ -589,27 +638,37 @@ function vToday(){
         <p>The approach was right and the arithmetic was not.</p>
         <div class="sig">Signal <b>near miss after a clean run</b></div></div>
     </div>
-    <p style="text-align:center;margin-top:26px;color:var(--ink3);font-size:14px">
-      Most wrong answers carry two of these at once, so we tag a primary and a secondary and fix the upstream one first. You never see two fixes at the same time.</p>
+    <p class="fineprint">Most wrong answers carry two of these at once, so we tag a primary and a secondary and fix the upstream one first. You never see two fixes at the same time.</p>
   </div>
 </section>
 
-<section class="dark band" style="border-radius:28px;margin-bottom:40px">
-  <div class="wm">who</div>
+<section class="band" style="background:var(--sky-bg)">
   <div class="wrap">
-    <div class="shead"><div class="k">Mentors</div>
+    <div class="shead">
+      <div class="k">Mentors</div>
       <h2>Thirty minutes with someone already inside</h2>
-      <p>Not a counsellor on a sales call. A current student at the college you are actually targeting.</p></div>
-    <div style="display:flex;justify-content:center"><button class="pill" onclick="go('mentor')">Browse mentors &#8599;</button></div>
+      <p>Not a counsellor on a sales call. A current student at the college you are targeting, holding their own calendar.</p>
+    </div>
+    <div class="grid g3">
+      ${MENTORS.slice(0,3).map(m=>`<div class="mcard rv">
+        <div class="ph" style="background:${m.c}"><div class="ini">${(m.n.split(' ')[1]||m.n[0])}</div>
+          <img src="${m.img}" alt="" onerror="this.remove()"></div>
+        <div class="bd"><h4>${m.n}</h4><div class="role">${m.role}</div>
+          <div class="yrs">${m.yrs}</div>
+          <div class="tags">${m.tags.slice(0,3).map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        </div></div>`).join('')}
+    </div>
+    <div style="display:flex;justify-content:center;margin-top:30px">
+      <button class="pill dk" onclick="go('mentor')">Browse all mentors &#8599;</button></div>
   </div>
 </section>
 
-<section style="padding:30px 0 90px">
+<section class="dark" style="padding:84px 0">
   <div class="wrap">
     <p class="quote rv">&ldquo;More questions are starting to make sense.&rdquo;<br>
-      <span style="color:var(--ink3)">That is a feeling. We give you a number.</span></p>
+      <span style="color:#8d8d86">That is a feeling. We give you a number.</span></p>
     <div style="display:flex;justify-content:center;margin-top:32px">
-      <button class="pill dk" onclick="openPop()">Play today&rsquo;s case &#8599;</button></div>
+      <button class="pill solid" onclick="openPop()">Play today&rsquo;s case &#8599;</button></div>
   </div>
 </section>`;
 }
@@ -623,7 +682,7 @@ function vMentor(){
       <div>
         <h1 class="ph1">Our mentors</h1>
         <svg class="sq" style="margin-left:0" viewBox="0 0 120 14"><path d="M2 9 Q 18 1 34 8 T 66 8 T 98 7 T 118 4" fill="none" stroke="url(#g2)" stroke-width="2.5" stroke-linecap="round"/>
-          <defs><linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#3cb46e"/><stop offset=".5" stop-color="#f0a13c"/><stop offset="1" stop-color="#e0614f"/></linearGradient></defs></svg>
+          <defs><linearGradient id="g2" x1="0" x2="1"><stop offset="0" stop-color="#1e4b98"/><stop offset=".55" stop-color="#2f6fbf"/><stop offset="1" stop-color="#6f9ede"/></linearGradient></defs></svg>
       </div>
       <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
         <span class="chip">${S.credits} credits left</span>
@@ -669,6 +728,11 @@ function vRepo(){
     <span class="chip">Routed here by your last error</span>
     <h1 class="ph1" style="margin-top:14px">${REPO.title}</h1>
     <p class="psub">Read it once, then prove it. The ladder stops when you stop.</p>
+    <div class="casecta rv" style="margin-bottom:24px">
+      <div><div class="t">Today&rsquo;s case</div>
+        <div class="d">The questions that routed you here live inside it</div></div>
+      <div class="r"><button class="pill solid" onclick="openPop()">Open the case &#8599;</button></div>
+    </div>
     <div class="card" style="padding:26px">${REPO.body.map(p=>`<p style="margin-bottom:13px;color:var(--ink2);font-size:15.5px">${p}</p>`).join('')}</div>
     <div style="margin-top:26px">
       ${i<REPO.quiz.length?`
@@ -712,7 +776,7 @@ function vPractice(){
         <button class="btn sm" style="margin-top:14px" onclick="go('repo')">Fix this one</button>
       </div>`).join('')}
     </div>
-    <div class="card" style="margin-top:20px;background:#fdf3e4;border-color:#f6e0bd">
+    <div class="card" style="margin-top:20px;background:var(--sky-bg);border-color:#d4e1f3">
       <h3>Why only one fix shows at a time</h3>
       <p>Three of these carry a second cause underneath. The platform holds those back until the upstream one is cleared, because fixing a method on a concept you do not have yet just makes you faster at being wrong.</p>
     </div>
@@ -743,10 +807,17 @@ function onboard(){
 /* ---------- mocks ---------- */
 function vMock(){
   return `<div class="view"><div class="wrap" style="max-width:860px">
+    <div class="casecta rv" style="margin-bottom:30px">
+      <div><div class="t">Today&rsquo;s case</div>
+        <div class="d">${CASE.date} &middot; ${CASE.title} &middot; five questions, one situation</div></div>
+      <div class="r">
+        ${S.caseDone?`<span class="chip" style="background:#243049;color:#9fc0ee">${S.casePct}th percentile</span>`:''}
+        <button class="pill solid" onclick="openPop()">${S.caseDone?'Open it again':'Play it now'} &#8599;</button></div>
+    </div>
     <h1 class="ph1">Weekly mock</h1>
     <p class="psub">Same interface as the real exam. Pick the paper before you start.</p>
     <div class="grid g2">
-      <div class="card rv" style="padding:26px"><span class="chip" style="background:#e8f6ee;color:#2a8f54">Mode one</span>
+      <div class="card rv" style="padding:26px"><span class="chip" style="background:#e9f0fa;color:#153a78">Mode one</span>
         <h3 style="margin-top:12px;font-size:21px">Pegged to you</h3>
         <p>Every concept in this paper is one you have already cleared, so nothing here should be unsolvable. It measures speed, accuracy and selection rather than knowledge.</p>
         <button class="btn" style="margin-top:18px;width:100%;justify-content:center" onclick="openMock('pegged')">Start pegged paper</button></div>
