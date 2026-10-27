@@ -352,8 +352,8 @@ section.band{padding:84px 0}
 </div>
 
 <footer><div class="wrap">
-  Meridian Prep, a Round 2 prototype for Ace the Case 2026.
-  Free, and it stays free.
+  Meridian Prep, built as a Round 2 prototype for Ace the Case 2026.
+  The diagnosis layer is the product, so it never goes behind a paywall.
 </div></footer>
 <script>
 /* ---------- state ---------- */
@@ -495,7 +495,7 @@ function drawPop(){
     <p class="qstem">${q.stem}</p>
     ${q.opts.map((o,k)=>`<button class="opt ${picked!=null?(k===q.ans?'ok':(k===picked?'no':'')):''}"
        onclick="pick(${k})" ${picked!=null?'disabled':''}>${o}</button>`).join('')}
-    ${picked!=null?`<div class="why"><div class="k">Why that one went wrong</div><p>${q.why}</p></div>
+    ${picked!=null?`<div class="why"><div class="k">Why that option was the trap</div><p>${q.why}</p></div>
       <div style="margin-top:20px;text-align:right">
         <button class="btn" onclick="nextQ()">${i===n-1?'See your score':'Next question'}</button>
       </div>`:''}`;
@@ -520,13 +520,13 @@ function popResult(){
       <div class="scorebig" style="margin-top:26px">${right} of ${n}</div>
       <span class="pcpill">${pct}th percentile today</span>
       <p style="color:var(--ink2);margin:20px auto 0;max-width:46ch">
-        Everyone got the same case today, so that percentile is a straight comparison. Come back tomorrow for a new one.</p>
+        Everybody sat the same case today, so that number is a straight comparison and not a guess. There is a new one tomorrow.</p>
     </div>
     <div class="grid g2" style="margin-top:28px">
-      <div class="card"><h3>What the platform read</h3>
-        <p>${right===n?'Nothing to fix on this one. The platform had no error to tag.':'Your wrong answer was a selection error, which means you committed before the stem was fully held. The platform tagged it from how fast you answered and the fact that you never went back up.'}</p></div>
-      <div class="card"><h3>What it is sending you next</h3>
-        <p>${right===n?'A harder case tomorrow, one rung up from this one.':'The percentage change concept, because that is the upstream cause. The method fix unlocks after you clear it.'}</p>
+      <div class="card"><h3>What we read off your answers</h3>
+        <p>${right===n?'Nothing went wrong here, so there is nothing for us to tag.':'You picked before you had the whole stem in your head. We know that because of how quickly you answered and because you never scrolled back up to read it again.'}</p></div>
+      <div class="card"><h3>What we are sending you next</h3>
+        <p>${right===n?'A harder case tomorrow, one rung up from this one.':'Percentage change on a shifting base, because that is the thing sitting underneath it. The method work opens up once you have cleared that.'}</p>
         <button class="btn sm" style="margin-top:14px" onclick="closePop();go('repo')">Open the concept</button></div>
     </div>
     <div style="text-align:center;margin-top:26px">
@@ -549,10 +549,10 @@ function vToday(){
       <img src="https://i.pravatar.cc/120?img=${a[2]}" alt=""></div>`).join('')}
   </div>
   <div class="wrap">
-    <span class="eyebrow">Free. No account to start.</span>
+    <span class="eyebrow">Free, and you don&rsquo;t have to make an account</span>
     <h1 class="mix">Still studying for CAT <i>like a fifth grader?</i></h1>
-    <p class="sub">You already know which section hurt you. Nobody has ever told you why.
-      Meridian reads how you answer, names the actual cause, and fixes one thing at a time.</p>
+    <p class="sub">You know which section went badly. You have never been told why it went badly, because
+      nobody has bothered to work that out for you. We do, and then we give you one thing to go and fix.</p>
     <div class="herocta">
       <button class="pill solid" onclick="openPop()">${done?'Replay today’s case':'Play today’s case'} &#8599;</button>
       <button class="pill" onclick="go('mock')">Take a mock</button>
@@ -569,23 +569,26 @@ function vToday(){
   <div class="wm">how</div>
   <div class="wrap">
     <div class="shead">
-      <div class="k">Three steps, ten minutes a day</div>
-      <h2>One case. Five questions. One fix.</h2>
+      <div class="k">What you actually do here</div>
+      <h2>Ten minutes, once a day</h2>
       <svg class="sq" viewBox="0 0 120 14"><path d="M2 9 Q 18 1 34 8 T 66 8 T 98 7 T 118 4" fill="none" stroke="url(#g1)" stroke-width="2.5" stroke-linecap="round"/>
         <defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#1e4b98"/><stop offset=".55" stop-color="#2f6fbf"/><stop offset="1" stop-color="#6f9ede"/></linearGradient></defs></svg>
     </div>
     <div class="steps">
       <div class="step rv"><div class="sn">1</div>
         <h3>Answer today&rsquo;s case</h3>
-        <p>It opens over the page. Five questions off one situation, the way an IIM actually sets a paper. No login, nothing to create.</p>
+        <p>One situation with five questions hanging off it, which is how an IIM actually sets a paper
+          and why reading it from one angle never helps you. It opens over the page and you are out in ten minutes.</p>
         <button class="lnk" onclick="openPop()">Open it &#8599;</button></div>
       <div class="step rv"><div class="sn">2</div>
-        <h3>Read the cause, not the score</h3>
-        <p>We never ask you to explain. We read how you got there and name which of the four causes it was.</p>
+        <h3>Find out why you got it wrong</h3>
+        <p>We never ask you to explain yourself, because in a multiple choice test the only thing you hand over
+          is an answer. We read how you got to it instead, and tell you which of four things went wrong.</p>
         <button class="lnk" onclick="document.getElementById('causes').scrollIntoView()">See the four &#8599;</button></div>
       <div class="step rv"><div class="sn">3</div>
-        <h3>Clear the one thing underneath</h3>
-        <p>A concept page and a rising quiz, routed to whichever cause sat upstream. One fix at a time, never two.</p>
+        <h3>Fix the one thing underneath it</h3>
+        <p>You get sent to one concept page with a quiz that keeps getting harder, and only the cause that
+          sat upstream of everything else. One thing, so you have a chance of finishing it.</p>
         <button class="lnk" onclick="go('repo')">Open concepts &#8599;</button></div>
     </div>
   </div>
@@ -595,10 +598,11 @@ function vToday(){
   <div class="wm">why</div>
   <div class="wrap">
     <div class="shead">
-      <div class="k">The gap nobody fills</div>
+      <div class="k">The thing every platform skips</div>
       <h2 style="font-family:Nunito;font-style:normal;font-weight:800;letter-spacing:-.03em">
         Every platform tells you <i class="serif" style="font-weight:400">what</i> happened.</h2>
-      <p>None of them tell you why. So you re-read the topic you already read, and the same question beats you again next month.</p>
+      <p>None of them tell you why, so you go back and re-read a topic you had already read,
+        and then the same question beats you again next month. That loop is the actual problem.</p>
     </div>
     <div class="vs">
       <div class="col rv"><div class="k">What you do now</div>
@@ -621,8 +625,9 @@ function vToday(){
   <div class="wrap">
     <div class="shead">
       <div class="k">The diagnosis layer</div>
-      <h2>Four causes, read from behaviour</h2>
-      <p style="margin-top:16px">In a multiple choice test the only thing you hand us is an answer, so we never ask you to explain. We read how you got there.</p>
+      <h2>Four causes, read off how you answered</h2>
+      <p style="margin-top:16px">You never have to tag your own errors, which is lucky, because almost nobody can.
+        Only one person we interviewed could do it, and she had been keeping a handwritten checklist for four months.</p>
     </div>
     <div class="grid g4">
       <div class="cause rv"><div class="n">01</div><h3>Selection error</h3>
@@ -638,7 +643,7 @@ function vToday(){
         <p>The approach was right and the arithmetic was not.</p>
         <div class="sig">Signal <b>near miss after a clean run</b></div></div>
     </div>
-    <p class="fineprint">Most wrong answers carry two of these at once, so we tag a primary and a secondary and fix the upstream one first. You never see two fixes at the same time.</p>
+    <p class="fineprint">Most wrong answers carry two of these at the same time, so we work out which one sat underneath the other and send you that one. You will never get handed two fixes at once, because then you do neither.</p>
   </div>
 </section>
 
@@ -646,8 +651,9 @@ function vToday(){
   <div class="wrap">
     <div class="shead">
       <div class="k">Mentors</div>
-      <h2>Thirty minutes with someone already inside</h2>
-      <p>Not a counsellor on a sales call. A current student at the college you are targeting, holding their own calendar.</p>
+      <h2>Half an hour with someone who is already in</h2>
+      <p>A current student at the college you are aiming for, running their own calendar, telling you what
+        the interview was actually like when they sat in it.</p>
     </div>
     <div class="grid g3">
       ${MENTORS.slice(0,3).map(m=>`<div class="mcard rv">
@@ -666,7 +672,8 @@ function vToday(){
 <section class="dark" style="padding:84px 0">
   <div class="wrap">
     <p class="quote rv">&ldquo;More questions are starting to make sense.&rdquo;<br>
-      <span style="color:#8d8d86">That is a feeling. We give you a number.</span></p>
+      <span style="color:#8d8d86">That is how people describe their own progress right now,
+      because nobody has ever given them a number to use instead.</span></p>
     <div style="display:flex;justify-content:center;margin-top:32px">
       <button class="pill solid" onclick="openPop()">Play today&rsquo;s case &#8599;</button></div>
   </div>
@@ -689,7 +696,7 @@ function vMentor(){
         <span style="font-size:13px;color:var(--ink3)">1 credit = 30 minutes</span>
       </div>
     </div>
-    <p class="psub">Two credits open on signup and the rest unlock as you use the platform, because there are more of you than there are of them.</p>
+    <p class="psub">Two credits open the moment you sign up and the rest unlock as you use the platform. Everyone here signed up on their own and runs their own calendar, so what you book is with them and not with us.</p>
     <div class="mentorbar">
       <div class="rail">${DOMAINS.map(d=>`<button class="${d===MDOM?'on':''}" onclick="setDom('${d}')">${d}</button>`).join('')}</div>
       <div class="grid g3">
@@ -715,9 +722,9 @@ function vMentor(){
 function setDom(d){ MDOM=d; render(); }
 function book(i){
   const m=MENTORS[i];
-  if(S.credits<1){ alert('No credits left. Finish today’s case to earn one.'); return; }
+  if(S.credits<1){ alert('You are out of credits. Finish today’s case and another one opens up.'); return; }
   S.credits-=1; save();
-  alert('Request sent to '+m.n+'. They hold their own Calendly, so the confirmation comes from them.');
+  alert('Sent to '+m.n+'. They run their own calendar, so the confirmation will come from them and not from us.');
   render();
 }
 
@@ -725,12 +732,12 @@ function book(i){
 function vRepo(){
   const i=S.repoStage, q=REPO.quiz[i];
   return `<div class="view"><div class="wrap" style="max-width:780px">
-    <span class="chip">Routed here by your last error</span>
+    <span class="chip">You were sent here by your last wrong answer</span>
     <h1 class="ph1" style="margin-top:14px">${REPO.title}</h1>
-    <p class="psub">Read it once, then prove it. The ladder stops when you stop.</p>
+    <p class="psub">Read it through once and then prove you have it. The questions keep getting harder until you decide to stop, so where you stop is the honest answer.</p>
     <div class="casecta rv" style="margin-bottom:24px">
       <div><div class="t">Today&rsquo;s case</div>
-        <div class="d">The questions that routed you here live inside it</div></div>
+        <div class="d">The question that sent you to this page is sitting inside it</div></div>
       <div class="r"><button class="pill solid" onclick="openPop()">Open the case &#8599;</button></div>
     </div>
     <div class="card" style="padding:26px">${REPO.body.map(p=>`<p style="margin-bottom:13px;color:var(--ink2);font-size:15.5px">${p}</p>`).join('')}</div>
@@ -744,7 +751,7 @@ function vRepo(){
         ${q.opts.map((o,k)=>`<button class="opt" onclick="repoAns(${k})">${o}</button>`).join('')}`
       : `<div class="card" style="text-align:center;padding:34px">
           <div class="scorebig">${S.repoScore} / ${REPO.quiz.length}</div>
-          <p style="margin-top:14px;color:var(--ink2)">Concept cleared. Method refinement is open now.</p>
+          <p style="margin-top:14px;color:var(--ink2)">That concept is closed now, so the method work underneath it has opened up.</p>
           <button class="btn" style="margin-top:18px" onclick="S.repoStage=0;S.repoScore=0;save();render()">Run it again</button>
         </div>`}
     </div>
@@ -765,8 +772,8 @@ function vPractice(){
     ['Logarithms, base change','QA','Concept gap','4 times','repo']
   ];
   return `<div class="view"><div class="wrap">
-    <h1 class="ph1">Your weak point read</h1>
-    <p class="psub">Built from what you did. There is nothing here for you to fill in.</p>
+    <h1 class="ph1">Where you keep faulting</h1>
+    <p class="psub">All of this came out of how you answered, so there is nothing on this page for you to fill in or keep updated, which is the only reason it still exists three weeks in.</p>
     <div class="grid g2">
       ${rows.map(r=>`<div class="card rv">
         <div style="display:flex;gap:8px;margin-bottom:10px"><span class="chip">${r[1]}</span>
@@ -777,8 +784,8 @@ function vPractice(){
       </div>`).join('')}
     </div>
     <div class="card" style="margin-top:20px;background:var(--sky-bg);border-color:#d4e1f3">
-      <h3>Why only one fix shows at a time</h3>
-      <p>Three of these carry a second cause underneath. The platform holds those back until the upstream one is cleared, because fixing a method on a concept you do not have yet just makes you faster at being wrong.</p>
+      <h3>Why you are only seeing one fix</h3>
+      <p>Three of these have a second cause sitting underneath them, and we are holding those back until you clear the first one, because speeding up a method on a concept you do not actually have yet only makes you faster at getting it wrong.</p>
     </div>
   </div></div>`;
 }
@@ -787,20 +794,20 @@ function vPractice(){
 function vYou(){
   return `<div class="view"><div class="wrap" style="max-width:820px">
     <h1 class="ph1">You</h1>
-    <p class="psub">Built across sessions. Nothing here was a form you had to finish.</p>
+    <p class="psub">This filled itself in over a few visits. You were never made to sit through a form before you could use anything.</p>
     <div class="grid g2">
       <div class="card rv"><h3>Profile read</h3>
         <p>${S.profile?('Work experience '+S.profile+'. Matched against the profile of candidates who actually convert, by institute.'):'Tell us one thing and this starts working. It never blocks anything.'}</p>
         <button class="btn sm" style="margin-top:14px" onclick="onboard()">${S.profile?'Update it':'Add work experience'}</button></div>
       <div class="card rv"><h3>Subject scores</h3>
-        <p>VARC 68 &middot; DILR 54 &middot; QA 61. Percentile sits in the weekly mock and the daily case, never here, because a percentile on every screen in week two of a preparation helps nobody.</p></div>
-      <div class="card rv"><h3>Streak</h3><p>${S.streak||0} days. The streak is a nudge. The mentor call is the commitment.</p></div>
-      <div class="card rv"><h3>Credits</h3><p>${S.credits} of 10. Two came free and the rest unlock as you use the platform.</p></div>
+        <p>VARC 68, DILR 54, QA 61. Your percentile lives in the weekly mock and in the daily case, and it stays out of here, because seeing a percentile on every screen in week two of a preparation has never helped anybody.</p></div>
+      <div class="card rv"><h3>Streak</h3><p>${S.streak||0} days. A streak is a nudge and not much more, which is why the thing we actually lean on is a call you have booked with a person who is expecting you.</p></div>
+      <div class="card rv"><h3>Credits</h3><p>${S.credits} of 10. Two open straight away and the rest unlock as you use the platform, because there are a lot more of you than there are mentors.</p></div>
     </div>
   </div></div>`;
 }
 function onboard(){
-  const v=prompt('Work experience. Pick one: 0, 1, 3, 6, 12, 24 months, or years.');
+  const v=prompt('How much work experience do you have? Answer in months, or in years if it is more than two.');
   if(v){ S.profile=v+' months'; S.signed=true; save(); render(); }
 }
 
@@ -809,26 +816,26 @@ function vMock(){
   return `<div class="view"><div class="wrap" style="max-width:860px">
     <div class="casecta rv" style="margin-bottom:30px">
       <div><div class="t">Today&rsquo;s case</div>
-        <div class="d">${CASE.date} &middot; ${CASE.title} &middot; five questions, one situation</div></div>
+        <div class="d">${CASE.date}. ${CASE.title}. Five questions, all off the one situation.</div></div>
       <div class="r">
         ${S.caseDone?`<span class="chip" style="background:#243049;color:#9fc0ee">${S.casePct}th percentile</span>`:''}
         <button class="pill solid" onclick="openPop()">${S.caseDone?'Open it again':'Play it now'} &#8599;</button></div>
     </div>
     <h1 class="ph1">Weekly mock</h1>
-    <p class="psub">Same interface as the real exam. Pick the paper before you start.</p>
+    <p class="psub">The interface is the one you will sit in on the day, palette and all, because a mock that feels nothing like the exam is only testing whether you can do sums.</p>
     <div class="grid g2">
       <div class="card rv" style="padding:26px"><span class="chip" style="background:#e9f0fa;color:#153a78">Mode one</span>
         <h3 style="margin-top:12px;font-size:21px">Pegged to you</h3>
-        <p>Every concept in this paper is one you have already cleared, so nothing here should be unsolvable. It measures speed, accuracy and selection rather than knowledge.</p>
+        <p>Every concept in here is one you have already cleared, so if you get something wrong it was never because you did not know it. This paper is measuring how fast you are and what you chose to attempt.</p>
         <button class="btn" style="margin-top:18px;width:100%;justify-content:center" onclick="openMock('pegged')">Start pegged paper</button></div>
       <div class="card rv" style="padding:26px"><span class="chip" style="background:#fdeeec;color:#a33">Mode two</span>
         <h3 style="margin-top:12px;font-size:21px">National level</h3>
-        <p>Full CAT difficulty. There will be questions you cannot do, and that is the point of sitting it.</p>
+        <p>Full CAT difficulty, so there will be questions you cannot do. Finding out which ones is the reason you sit it.</p>
         <button class="btn ghost" style="margin-top:18px;width:100%;justify-content:center" onclick="openMock('national')">Start national paper</button></div>
     </div>
     <div class="card" style="margin-top:22px">
-      <h3>After the last mock, your selection read</h3>
-      <p style="margin-top:10px">Scored from what you did, never from what you told us.</p>
+      <h3>What your last mock said about your picks</h3>
+      <p style="margin-top:10px">Worked out from what you actually opened and left, rather than from anything you told us afterwards.</p>
       <ul style="list-style:none;margin-top:14px">
         <li style="padding:11px 0;border-top:1px solid var(--line);font-size:14.5px;color:var(--ink2)">
           <b style="color:var(--ink)">You opened 4 sets in DILR and entered 2.</b> Both were in topics where your accuracy sits under 40 percent. You spent 13 minutes there and scored 2 marks.</li>
